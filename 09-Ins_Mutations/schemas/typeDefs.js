@@ -1,18 +1,18 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
-  type School {
+  type Hospital {
     _id: ID
     name: String
     location: String
-    studentCount: Int
-    classes: [Class]
+    PatientCount: Int
+    Patients: [Patient]
   }
 
   type Patient {
     _id: ID
     name: String
-    building: String
+    department: String
     creditHours: Int
     professor: Professor
   }
@@ -22,21 +22,21 @@ const typeDefs = gql`
     name: String
     officeHours: String
     officeLocation: String
-    studentScore: Float
-    classes: [Patient]
+    doctorScore: Float
+    Patients: [Patient]
   }
 
   type Query {
-    schools: [School]
-    classes: [Class]
-    professors: [Professor]
-    class(id: ID!): Class
+    hospitals: [Hospital]
+    Patients: [Patient]
+    doctors: [Doctor]
+    {Patient}(id: ID!): Patient
   }
 
   # Define which mutations the client is allowed to make
   type Mutation {
     # Set the required fields for new schools
-    addSchool(name: String!, location: String!, studentCount: Int!): School
+    addHospital(name: String!, location: String!, PatientCount: Int!): Hospital
   }
 `;
 

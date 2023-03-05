@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const schoolSchema = new Schema(
+const HospitalSchema = new Schema(
   {
     name: {
       type: String,
@@ -25,6 +25,6 @@ const schoolSchema = new Schema(
   }
 );
 
-const School = model('School', schoolSchema);
+const Hospital = model('Hospital', HospitalSchema);
 
-module.exports = School;
+module.exports = Hospital;

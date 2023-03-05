@@ -1,28 +1,28 @@
-const { School, Class, Professor } = require('../models');
+const { Hospital, Patient, Doctor } = require('../models');
 
 const resolvers = {
   Query: {
-    schools: async () => {
-      return await School.find({}).populate('classes').populate({
-        path: 'classes',
-        populate: 'professor',
+    Hospitals: async () => {
+      return await Hospital.find({}).populate('Patients').populate({
+        path: 'Patients',
+        populate: 'Doctor',
       });
     },
-    classes: async () => {
-      return await Class.find({}).populate('professor');
+    Patients: async () => {
+      return await Patient.find({}).populate('Doctor');
     },
-    class: async (parent, args) => {
-      return await Class.findById(args.id).populate('professor');
+    Patient: async (parent, args) => {
+      return await Patient.findById(args.id).populate('Doctor');
     },
-    professors: async () => {
-      return await Professor.find({}).populate('classes');
+    Doctors: async () => {
+      return await Doctor.find({}).populate('Patients');
     },
   },
   // Define the functions that will fulfill the mutations
   Mutation: {
-    addSchool: async (parent, { name, location, studentCount }) => {
-      // Create and return the new School object
-      return await School.create({ name, location, studentCount });
+    addHospital: async (parent, { name, location, studentCount }) => {
+      // Create and return the new Hospital object
+      return await Hospital.create({ name, location, studentCount });
     },
   },
 };
