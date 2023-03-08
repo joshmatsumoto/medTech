@@ -1,5 +1,5 @@
-const School = require('./School');
-const Class = require('./Patient');
-const Professor = require('./Doctor');
+const Hospital = require('./Hospital');
+const Patient = require('./Patient');
+const Doctor = require('./Doctor');
 
-module.exports = { School, Class, Professor };
+module.exports = { Hospital, Patient, Doctor };

@@ -29,4 +29,4 @@ const DoctorSchema = new Schema(
 
 const Doctor = model('Doctor', DoctorSchema);
 
-module.exports = Professor;
+module.exports = Doctor;

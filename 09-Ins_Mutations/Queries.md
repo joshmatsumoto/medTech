@@ -1,5 +1,5 @@
-query Schools {
-  schools {
+query Hospitals {
+  Hospital {
     _id
     name
     location

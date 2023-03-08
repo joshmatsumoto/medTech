@@ -12,7 +12,7 @@ const HospitalSchema = new Schema(
       type: String,
       required: true
     },
-    studentCount: {
+    patientCount: {
       type: Number,
       required: true
     },

@@ -1,35 +1,35 @@
 const db = require('../config/connection');
-const { School, Class, Professor } = require('../models');
+const { Hospital, Patient, Doctor } = require('../models');
 
-const schoolData = require('./schoolData.json');
-const classData = require('./classData.json');
-const professorData = require('./professorData.json');
+const HospitalData = require('./HospitalData.json');
+const PatientData = require('./PatientData.json');
+const DoctorData = require('./DoctorData.json');
 
 db.once('open', async () => {
   // clean database
-  await School.deleteMany({});
-  await Class.deleteMany({});
-  await Professor.deleteMany({});
+  await Hospital.deleteMany({});
+  await Patient.deleteMany({});
+  await Doctor.deleteMany({});
 
   // bulk create each model
-  const schools = await School.insertMany(schoolData);
-  const classes = await Class.insertMany(classData);
-  const professors = await Professor.insertMany(professorData);
+  const Hospitals = await Hospital.insertMany(HospitalData);
+  const Patientes = await Patient.insertMany(PatientData);
+  const Doctors = await Doctor.insertMany(DoctorData);
 
-  for (newClass of classes) {
-    // randomly add each class to a school
-    const tempSchool = schools[Math.floor(Math.random() * schools.length)];
-    tempSchool.classes.push(newClass._id);
-    await tempSchool.save();
+  for (newPatient of Patientes) {
+    // randomly add each Patient to a Hospital
+    const tempHospital = Hospitals[Math.floor(Math.random() * Hospitals.length)];
+    tempHospital.Patientes.push(newPatient._id);
+    await tempHospital.save();
 
-    // randomly add a professor to each class
-    const tempProfessor = professors[Math.floor(Math.random() * professors.length)];
-    newClass.professor = tempProfessor._id;
-    await newClass.save();
+    // randomly add a Doctor to each Patient
+    const tempDoctor = Doctors[Math.floor(Math.random() * Doctors.length)];
+    newPatient.Doctor = tempDoctor._id;
+    await newPatient.save();
 
-    // reference class on professor model, too
-    tempProfessor.classes.push(newClass._id);
-    await tempProfessor.save();
+    // reference Patient on Doctor model, too
+    tempDoctor.Patientes.push(newPatient._id);
+    await tempDoctor.save();
   }
 
   console.log('all done!');

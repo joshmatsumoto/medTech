@@ -14,7 +14,7 @@ const typeDefs = gql`
     name: String
     department: String
     creditHours: Int
-    professor: Professor
+    Doctor: Doctor
   }
 
   type Doctor {
