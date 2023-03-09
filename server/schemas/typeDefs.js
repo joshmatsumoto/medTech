@@ -38,6 +38,7 @@ const typeDefs = gql`
   phone: String
   doctors: [Doctor]
   patients: [Patient]
+  hospitals: [Hospital]
   }
 
   type Query {

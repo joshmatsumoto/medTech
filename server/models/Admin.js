@@ -56,7 +56,7 @@ const administratorSchema = new Schema({
     },
   ],
 
-  hospital: [
+  hospitals: [
     {
       type: Schema.Types.ObjectId,
       ref: "Hospital",
