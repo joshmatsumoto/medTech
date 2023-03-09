@@ -1,16 +1,25 @@
 const { Schema, model } = require("mongoose");
 
-const hospitalSchema = new Schema({
+const administratorSchema = new Schema({
   name: {
     type: String,
     required: true,
     unique: true,
     trim: true,
   },
-  location: {
+
+  email: {
     type: String,
-    required: true,
+    unique: true,
+    required: [true, "An email is required."],
+    validate: {
+      validator: function (v) {
+        return /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/.test(v);
+      },
+      message: (props) => `${props.value} is not a valid email!`,
+    },
   },
+
   phoneNumber: {
     type: String,
     required: true,
@@ -34,9 +43,16 @@ const hospitalSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: "Patient",
     },
-  ]
+  ],
+
+  hospital: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Hospital",
+    },
+  ],
 });
 
-const Hospital = model("Hospital", hospitalSchema);
+const Administrator = model("Administrator", administratorSchema);
 
-module.exports = Hospital;
+module.exports = Administrator;

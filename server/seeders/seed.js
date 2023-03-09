@@ -1,5 +1,5 @@
 const connection = require('../config/connection');
-const { Doctor, Patient, Hospital } = require('../models');
+const { Doctor, Patient, Hospital, Administrator } = require('../models');
 const { faker } = require('@faker-js/faker');
 const dayjs = require('dayjs');
 
@@ -49,7 +49,19 @@ connection.once('open', async () => {
       name: faker.company.name(),
       address: faker.address.streetAddress(true),
       phone: faker.phone.number('555-###-####'),
-    });
+    })
+  }
+
+  await Administrator.deleteMany({});
+
+  const admins = [];
+  for (let i = 0; i < 1; i++) {
+    admins.push({
+      name: faker.name.fullName({firstName: 'John', lastName: 'Doe',}),
+      email: faker.internet.email('John', 'Doe'),
+      phoneNumber: '555-555-555'
+
+    })
   }
 
   await Doctor.collection.insertMany(doctors);
@@ -58,12 +70,16 @@ connection.once('open', async () => {
 
   await Hospital.collection.insertMany(hospitals);
 
+  await Administrator.collection.insertMany(admins);
+
   console.table(doctors);
   console.table(patients);
   console.table(hospitals);
+  console.table(admins);
   console.info(`seeded ${doctors.length} Doctors`);
   console.info(`seeded ${patients.length} Patients`);
   console.info(`seeded ${hospitals.length} Hospital`);
+  console.info(`seeded ${admins.length} Admins`);
   process.exit(0);
 
 });
