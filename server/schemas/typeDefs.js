@@ -31,6 +31,8 @@ const typeDefs = gql`
     patients: [Patient]
     doctors: [Doctor]
     patient(id: ID!): Patient
+    doctorsByScore(doctorScore: Float): [Doctor]
+    doctor(id:ID!): Doctor
   }
 
   # Define which mutations the client is allowed to make

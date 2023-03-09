@@ -17,14 +17,20 @@ const resolvers = {
     doctors: async () => {
       return await Doctor.find({}).populate('patients');
     },
-  },
-  // Define the functions that will fulfill the mutations
-  Mutation: {
-    addHospital: async (parent, { name, location, patientCount }) => {
-      // Create and return the new Hospital object
-      return await Hospital.create({ name, location, patientCount });
+    doctors: async (parent, args) => {
+      return await Doctor.find(args.doctorScore);
+    },
+    doctor: async (parent, args) => {
+      return await Doctor.findById(args.id);
     },
   },
-};
+    // Define the functions that will fulfill the mutations
+    Mutation: {
+      addHospital: async (parent, { name, location, patientCount }) => {
+        // Create and return the new Hospital object
+        return await Hospital.create({ name, location, patientCount });
+      },
+    },
+  };
 
-module.exports = resolvers;
+  module.exports = resolvers;
