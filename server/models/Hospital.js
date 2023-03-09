@@ -12,14 +12,14 @@ const hospitalSchema = new Schema(
       type: String,
       required: true
     },
-    patientCount: {
-      type: Number,
+    phoneNumber: {
+      type: String,
       required: true
     },
-    Patients: [
+    Doctors: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Patient'
+        ref: 'Doctor'
       }
     ]
   }
