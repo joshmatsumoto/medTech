@@ -5,17 +5,39 @@ const patientSchema = new Schema(
     name: {
       type: String,
       required: true,
-      unique: true,
       trim: true
     },
-    building: {
-      type: String,
-      required: true
-    },
-    creditHours: {
+    
+    age: {
       type: Number,
-      required: true
+      required: true,
+
     },
+
+    gender: {
+      type: String,
+      required: true,
+
+    },
+
+    address: {
+      type: String,
+      required: true,
+
+    },
+
+    phone: {
+      type: String,
+      required: true,
+
+    },
+
+    email: {
+      type: String,
+      required: true,
+      
+    },
+
     Doctor: {
       type: Schema.Types.ObjectId,
       ref: 'Doctor'

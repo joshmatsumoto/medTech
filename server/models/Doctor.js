@@ -7,6 +7,11 @@ const doctorSchema = new Schema(
       required: true,
       trim: true
     },
+    department: {
+      type: String,
+      required: true,
+      trim: true
+    },
     doctorScore: {
       type: Number
     },
