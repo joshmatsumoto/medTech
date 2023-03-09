@@ -5,15 +5,19 @@ const typeDefs = gql`
     _id: ID
     name: String
     location: String
-    patientCount: Int
+    phoneNumber: String
+    doctors:[Doctor]
     patients: [Patient]
   }
 
   type Patient {
     _id: ID
     name: String
-    department: String
-    creditHours: Int
+    age: Int
+    gender: String
+    address: String
+    phone: String
+    email: String
     doctor: Doctor
   }
 
@@ -24,6 +28,16 @@ const typeDefs = gql`
     officeLocation: String
     doctorScore: Float
     patients: [Patient]
+    hospital: Hospital
+  }
+
+  type Admin {
+  id: ID
+  name: String
+  email: String
+  phone: String
+  doctors: [Doctor]
+  patients: [Patient]
   }
 
   type Query {

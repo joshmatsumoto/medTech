@@ -28,7 +28,12 @@ const doctorSchema = new Schema(
         type: Schema.Types.ObjectId,
         ref: 'Patient'
       }
-    ]
+    ],
+    Hospital: {
+      type: Schema.Types.ObjectId,
+      ref: 'Hospital'
+    }
+
   }
 );
 
