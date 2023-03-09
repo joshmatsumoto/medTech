@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const bcrypt = require('bcrypt');
 
 const administratorSchema = new Schema({
   name: {
@@ -18,6 +19,12 @@ const administratorSchema = new Schema({
       },
       message: (props) => `${props.value} is not a valid email!`,
     },
+  },
+  
+  password: {
+    type: String,
+    required: true,
+    minlength: 5,
   },
 
   phoneNumber: {
@@ -52,6 +59,10 @@ const administratorSchema = new Schema({
     },
   ],
 });
+
+administratorSchema.methods.isCorrectPassword = async function (password) {
+  return bcrypt.compare(password, this.password);
+};
 
 const Administrator = model("Administrator", administratorSchema);
 

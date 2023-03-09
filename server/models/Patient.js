@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const bcrypt = require('bcrypt');
 
 const patientSchema = new Schema({
   name: {
@@ -45,11 +46,22 @@ const patientSchema = new Schema({
     },
   },
 
+  password: {
+    type: String,
+    required: true,
+    minlength: 5,
+  },
+
   Doctor: {
     type: Schema.Types.ObjectId,
     ref: "Doctor",
   },
 });
+
+patientSchema.methods.isCorrectPassword = async function (password) {
+  return bcrypt.compare(password, this.password);
+};
+
 
 const Patient = model("Patient", patientSchema);
 
