@@ -26,17 +26,27 @@ const typeDefs = gql`
     patients: [Patient]
   }
 
+  type Admin {
+    _id: ID
+    name: String
+    email: String
+    username: String
+    password: String
+  }
+
   type Query {
     hospitals: [Hospital]
     patients: [Patient]
     doctors: [Doctor]
     patient(id: ID!): Patient
+    admin(username: String!, password: String!): Admin
   }
 
   # Define which mutations the client is allowed to make
   type Mutation {
     # Set the required fields for new schools
     addHospital(name: String!, location: String!, patientCount: Int!): Hospital
+    addAdmin(username:String!, password:String!): Admin
   }
 `;
 

@@ -17,6 +17,7 @@ const resolvers = {
     doctors: async () => {
       return await Doctor.find({}).populate('patients');
     },
+    
   },
   // Define the functions that will fulfill the mutations
   Mutation: {
