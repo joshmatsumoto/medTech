@@ -42,11 +42,26 @@ const typeDefs = gql`
     admin(username: String!, password: String!): Admin
   }
 
-  # Define which mutations the client is allowed to make
+  
   type Mutation {
+<<<<<<< HEAD
     # Set the required fields for new schools
     addHospital(name: String!, location: String!, patientCount: Int!): Hospital
     addAdmin(username:String!, password:String!): Admin
+=======
+    login(email: String!, password: String!): Auth
+    addDoctor(name: String!, officeHours: String!, officeLocation: String!, doctorScore: Float!): Doctor
+    createDoctor(name: String!, officeHours: String!, officeLocation: String!, doctorScore: Float): Doctor
+    updateDoctor(id: ID!, name: String, officeHours: String, officeLocation: String doctorScore: Float): Doctor
+    deleteDoctor(id: ID!): Doctor 
+    getallDoctors: [Doctor]
+    getallPatients: [Patient]
+    createPatient(name: String!, department: String!, creditHours: Int!): Patient
+    updatePatient(id: ID!, name: String, department: String, creditHours: Int): Patient
+    deletePatient(id: ID!): Patient
+
+
+>>>>>>> 30e878f141ebfa5a2944dfd1bc3892aa2653a3eb
   }
 `;
 

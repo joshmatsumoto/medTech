@@ -47,6 +47,11 @@ const resolvers = {
       // Create and return the new Admin object
       return await Administrator.create({ name, specialty });
     },
+    createDoctor: async (parent, {name, location}) => {
+      const doctor = await Doctor.create(args);
+      return doctor;
+    },
+
   },
 };
 
