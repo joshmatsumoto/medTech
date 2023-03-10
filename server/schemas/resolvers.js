@@ -17,7 +17,7 @@ const resolvers = {
     doctors: async () => {
       return await Doctor.find({}).populate('patients');
     },
-    admin: async () => {
+    administrator: async () => {
       return {
         hospitals: await Hospital.find({}).populate('patients').populate({
           path: 'patients',
@@ -31,19 +31,15 @@ const resolvers = {
   },
   // Define the functions that will fulfill the mutations
   Mutation: {
-    createHospital: async (parent, { name, location, patientCount }) => {
-      // Create and return the new Hospital object
-      return await Hospital.create({ name, location, patientCount });
-    },
-    createPatient: async (parent, { name, age, gender }) => {
+    createPatient: async (parent, { _id,userType, name, age, gender, adress, phone, email, password}) => {
       // Create and return the new Patient object
-      return await Patient.create({ name, age, gender });
+      return await Patient.create({ _id, name, age, gender, adress, phone, email, password});
     },
-    updatePatient: async (parent, { id, name, age, gender }) => {
+    updatePatient: async (parent, { id, name, age, gender, adress, phone, email, password }) => {
       // Create and return the new Patient object
       return await Patient.findByIdAndUpdate(
         { _id: id },
-        { $set: { name, age, gender } },
+        { $set: { id, name, age, gender, adress, phone, email, password  } },
         { new: true }
       );
     },
@@ -53,7 +49,7 @@ const resolvers = {
 
     },
 
-    createDoctor: async (parent, { _id, name, email, password, department, officeHours, officeLocation }) => {
+    createDoctor: async (parent, { _id, userType, name, email, password, department, officeHours, officeLocation }) => {
       // Create and return the new Doctor object
       return await Doctor.create({  _id, name, email, password, department, officeHours, officeLocation  });
     },

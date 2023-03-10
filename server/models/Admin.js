@@ -2,6 +2,10 @@ const { Schema, model } = require("mongoose");
 const bcrypt = require('bcrypt');
 
 const administratorSchema = new Schema({
+  userType: {
+    type: String,
+    default: 'administrator'
+  },
   name: {
     type: String,
     required: true,

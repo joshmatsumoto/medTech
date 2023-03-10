@@ -32,8 +32,9 @@ const typeDefs = gql`
     patients: [Patient]
     hospital: Hospital
   }
-  type Admin {
+  type Administrator {
   _id: ID
+  userType: String
   name: String
   email: String
   password: String
@@ -45,27 +46,48 @@ const typeDefs = gql`
 
   type Query {
     hospitals: [Hospital]
+    hospital(_id: ID!): Hospital
     patients: [Patient]
+    patient(_id: ID!): Patient
     doctors: [Doctor]
-    patient(id: ID!): Patient
-    admin(username: String!, password: String!): Admin
+    doctor(_id: ID!): Doctor
+    administrator(_id:ID!): Administrator
+    administrators: [Administrator]
+  }
+  type Auth {
+    token: ID
+    Administrator:Administrator
+  }
+  type Auth {
+    token: ID
+    Patient:Patient
+  }
+  type Auth {
+    token: ID
+    Doctor:Doctor
   }
 
   
   type Mutation {
     login(email: String!, password: String!): Auth
-    createDoctor(name: String!, officeHours: String!, officeLocation: String!, doctorScore: Float): Doctor
-    updateDoctor(id: ID!, name: String, officeHours: String, officeLocation: String doctorScore: Float): Doctor
-    deleteDoctor(id: ID!): Doctor
-    getallDoctors: [Doctor]
-    getallPatients: [Patient]
+
+    createDoctor(_id: ID!, name: String, email:String, password:String, department: String, officeHours: String, officeLocation: String): Doctor
+
+    updateDoctor(_id: ID!, name: String, email:String, password:String, department: String, officeHours: String, officeLocation: String): Doctor
+
+    deleteDoctor(_id: ID!): Doctor
+
     createPatient(name: String!, department: String!, creditHours: Int!): Patient
-    updatePatient(id: ID!, name: String, department: String, creditHours: Int): Patient
-    deletePatient(id: ID!): Patient
-    createAdmin(name: String!, email: String!, username: String!, password: String!): Admin
-    updateAdmin(id: ID!, name: String, email: String, username: String, password: String): Admin
-    deleteAdmin(id: ID!): Admin
-    getallAdmin: [Admin]
+
+    updatePatient(_id: ID!, name: String, department: String, creditHours: Int): Patient
+
+    deletePatient(_id: ID!): Patient
+
+    createAdmin(name: String!, email: String!,password: String!, phoneNumber:String): Administrator
+
+    updateAdmin(name: String!, email: String!,password: String!, phoneNumber:String): Administrator
+
+    deleteAdmin(_id: ID!): Administrator
 
 
   }
