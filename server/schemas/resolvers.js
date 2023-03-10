@@ -31,28 +31,51 @@ const resolvers = {
   },
   // Define the functions that will fulfill the mutations
   Mutation: {
-    addHospital: async (parent, { name, location, patientCount }) => {
+    createHospital: async (parent, { name, location, patientCount }) => {
       // Create and return the new Hospital object
       return await Hospital.create({ name, location, patientCount });
     },
-    addPatientByAdmin: async (parent, { name, age, gender }) => {
+    createPatient: async (parent, { name, age, gender }) => {
       // Create and return the new Patient object
       return await Patient.create({ name, age, gender });
     },
-    addDoctorByAdmin: async (parent, { name, department }) => {
-      // Create and return the new Doctor object
-      return await Doctor.create({ name, department });
+    updatePatient: async (parent, { id, name, age, gender }) => {
+      // Create and return the new Patient object
+      return await Patient.findByIdAndUpdate(
+        { _id: id },
+        { $set: { name, age, gender } },
+        { new: true }
+      );
     },
-    addAdminByAdmin: async (parent, { name, specialty }) => {
+    deletePatient: async (parent, { _id }) => {
+      // Create and return the new Patient object
+      return await Patient.findByIdAndDelete(_id); 
+
+    },
+
+    createDoctor: async (parent, { _id, name, email, password, department, officeHours, officeLocation }) => {
+      // Create and return the new Doctor object
+      return await Doctor.create({  _id, name, email, password, department, officeHours, officeLocation  });
+    },
+    createAdmin: async (parent, { name, specialty }) => {
       // Create and return the new Admin object
       return await Administrator.create({ name, specialty });
     },
-    createDoctor: async (parent, {name, location}) => {
-      const doctor = await Doctor.create(args);
-      return doctor;
+    updateDoctor: async (parent,{ doctorId }, context) => {
+      if (context.user) {
+        return await Doctor.findByIdAndUpdate(
+          { _id: doctorId },
+          { $addToSet: { patients: context.user._id } },
+          { new: true }
+        );
+    }
     },
-
-  },
+    deleteDoctor: async (parent, { _id }) => { 
+  
+        return await Doctor.findByIdAndDelete(_id)
+      
+    }
+  }
 };
 
 module.exports = resolvers;
