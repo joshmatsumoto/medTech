@@ -18,12 +18,16 @@ const typeDefs = gql`
     address: String
     phone: String
     email: String
+    password: String
     doctor: Doctor
   }
 
   type Doctor {
     _id: ID
     name: String
+    email: String
+    password: String
+    department: String
     officeHours: String
     officeLocation: String
     doctorScore: Float
@@ -32,9 +36,10 @@ const typeDefs = gql`
   }
 
   type Admin {
-  id: ID
+  _id: ID
   name: String
   email: String
+  password: String
   phone: String
   doctors: [Doctor]
   patients: [Patient]
