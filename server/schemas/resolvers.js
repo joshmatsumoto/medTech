@@ -39,6 +39,20 @@ const resolvers = {
       // Create and return the new Patient object
       return await Patient.create({ name, age, gender });
     },
+    updatePatient: async (parent, { id, name, age, gender }) => {
+      // Create and return the new Patient object
+      return await Patient.findByIdAndUpdate(
+        { _id: id },
+        { $set: { name, age, gender } },
+        { new: true }
+      );
+    },
+    deletePatient: async (parent, { _id }) => {
+      // Create and return the new Patient object
+      return await Patient.findByIdAndDelete(_id); 
+
+    },
+
     createDoctor: async (parent, { _id, name, email, password, department, officeHours, officeLocation }) => {
       // Create and return the new Doctor object
       return await Doctor.create({  _id, name, email, password, department, officeHours, officeLocation  });
@@ -56,16 +70,12 @@ const resolvers = {
         );
     }
     },
-    deleteDoctor: async (parent, { doctorId }, context) => { 
-      if (context.user) {
-        return await Doctor.findByIdAndUpdate(
-          { _id: doctorId },
-          { $pull: { patients: context.user._id } },
-          { new: true }
-        );  
+    deleteDoctor: async (parent, { _id }) => { 
+  
+        return await Doctor.findByIdAndDelete(_id)
+      
     }
-    },
-    }, 
+  }
 };
 
 module.exports = resolvers;
