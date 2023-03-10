@@ -1,5 +1,4 @@
 const { Hospital, Patient, Doctor } = require('../models');
-const { signToken } = require('../utils/auth');hjkl;
 
 const resolvers = {
   Query: {
@@ -25,6 +24,11 @@ const resolvers = {
       // Create and return the new Hospital object
       return await Hospital.create({ name, location, patientCount });
     },
+    createDoctor: async (parent, {name, location}) => {
+      const doctor = await Doctor.create(args);
+      return doctor;
+    },
+
   },
 };
 
