@@ -11,6 +11,7 @@ const typeDefs = gql`
   }
   type Patient {
     _id: ID
+    userType: String
     name: String
     age: Int
     gender: String
@@ -22,6 +23,7 @@ const typeDefs = gql`
   }
   type Doctor {
     _id: ID
+    userType: String
     name: String
     email: String
     password: String
@@ -71,19 +73,19 @@ const typeDefs = gql`
   type Mutation {
     login(email: String!, password: String!): Auth
 
-    createDoctor(_id: ID!, name: String, email:String, password:String, department: String, officeHours: String, officeLocation: String): Doctor
+    createDoctor(_id: ID!, userType:String, name: String, email:String, password:String, department: String, officeHours: String, officeLocation: String): Doctor
 
     updateDoctor(_id: ID!, name: String, email:String, password:String, department: String, officeHours: String, officeLocation: String): Doctor
 
     deleteDoctor(_id: ID!): Doctor
 
-    createPatient(name: String!, department: String!, creditHours: Int!): Patient
+    createPatient(_id: ID!, userType: String, name: String!, department: String!, creditHours: Int!): Patient
 
     updatePatient(_id: ID!, name: String, department: String, creditHours: Int): Patient
 
     deletePatient(_id: ID!): Patient
 
-    createAdmin(name: String!, email: String!,password: String!, phoneNumber:String): Administrator
+    createAdmin(_id:ID!, userType: String, name: String!, email: String!,password: String!, phoneNumber:String): Administrator
 
     updateAdmin(name: String!, email: String!,password: String!, phoneNumber:String): Administrator
 

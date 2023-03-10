@@ -52,13 +52,13 @@ const doctorSchema = new Schema(
       type: String,
       required: true
     },
-    Patients: [
+    patients: [
       {
         type: Schema.Types.ObjectId,
         ref: 'Patient'
       }
     ],
-    Hospital: {
+    hospital: {
       type: Schema.Types.ObjectId,
       ref: 'Hospital'
     }
