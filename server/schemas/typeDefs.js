@@ -5,34 +5,49 @@ const typeDefs = gql`
     _id: ID
     name: String
     location: String
-    patientCount: Int
+    phoneNumber: String
+    doctors:[Doctor]
     patients: [Patient]
   }
-
   type Patient {
     _id: ID
     name: String
-    department: String
-    creditHours: Int
+    age: Int
+    gender: String
+    address: String
+    phone: String
+    email: String
+    password: String
     doctor: Doctor
   }
-
   type Doctor {
     _id: ID
     name: String
+    email: String
+    password: String
+    department: String
     officeHours: String
     officeLocation: String
     doctorScore: Float
     patients: [Patient]
+    hospital: Hospital
   }
-
+  type Admin {
+  _id: ID
+  name: String
+  email: String
+  password: String
+  phone: String
+  doctors: [Doctor]
+  patients: [Patient]
+  hospitals: [Hospital]
+  }
   type Query {
     hospitals: [Hospital]
     patients: [Patient]
     doctors: [Doctor]
     patient(id: ID!): Patient
   }
-
   
   type Mutation {
     login(email: String!, password: String!): Auth
