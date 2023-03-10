@@ -1,4 +1,5 @@
 const { Hospital, Patient, Doctor } = require('../models');
+const { signToken } = require('../utils/auth');hjkl;
 
 const resolvers = {
   Query: {
