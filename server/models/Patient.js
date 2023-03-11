@@ -60,7 +60,7 @@ const patientSchema = new Schema({
     message: (props) => `${props.value} is not a valid password.`,
   },
 
-  pdoctor: {
+  doctor: {
     type: Schema.Types.ObjectId,
     ref: "Doctor",
   },

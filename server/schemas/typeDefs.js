@@ -41,9 +41,6 @@ const typeDefs = gql`
   email: String
   password: String
   phone: String
-  doctors: [Doctor]
-  patients: [Patient]
-  hospitals: [Hospital]
   }
 
   type Query {
@@ -51,10 +48,13 @@ const typeDefs = gql`
     hospital(_id: ID!): Hospital
     patients: [Patient]
     patient(_id: ID!): Patient
+    thisPatient: Patient
     doctors: [Doctor]
     doctor(_id: ID!): Doctor
-    administrator(_id:ID!): Administrator
+    thisDoctor: Doctor
     administrators: [Administrator]
+    administrator(_id:ID!): Administrator
+
   }
   type Auth {
     token: ID
@@ -73,21 +73,21 @@ const typeDefs = gql`
   type Mutation {
     login(email: String!, password: String!): Auth
 
-    createDoctor(_id: ID!, userType:String!, name: String!, email:String!, password:String!, department: String!, officeHours: String!, officeLocation: String!): Doctor
+    createDoctor( _id: ID!, name: String!, email:String!, password:String!, department: String!, officeHours: String!, officeLocation: String!): Auth
 
     updateDoctor(_id: ID!, name: String, email:String, password:String, department: String, officeHours: String, officeLocation: String): Doctor
 
     deleteDoctor(_id: ID!): Doctor
 
-    createPatient(_id: ID!, name: String!, age: Int!, gender: String!, address: String!, phone: String!, email: String!, password: String!,): Patient
+    createPatient( _id: ID!, name: String!, age: Int!, gender: String!, address: String!, phone: String!, email: String!, password: String!,): Auth
 
-    updatePatient(_id: ID!, userType: String, name: String, age: Int, gender: String, address: String, phone: String, email: String, password: String,): Patient
+    updatePatient(_id: ID!, name: String, age: Int, gender: String, address: String, phone: String, email: String, password: String,): Patient
 
     deletePatient(_id: ID!): Patient
 
-    createAdmin(_id:ID!, userType: String, name: String!, email: String!,password: String!, phoneNumber:String!): Administrator
+    createAdmin( _id: ID!, name: String!, email: String!,password: String!, phoneNumber:String!): Administrator
 
-    updateAdmin(_id:ID!, :name: String, email: String,password: String, phoneNumber:String): Administrator
+    updateAdmin( _id: ID!, name: String, email: String,password: String, phoneNumber:String): Administrator
 
     deleteAdmin(_id: ID!): Administrator
 

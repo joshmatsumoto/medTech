@@ -1,22 +1,17 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { Hospital, Patient, Doctor, Administrator } = require("../models");
+const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    hospitals: async () => {
-      return await Hospital.find({}).populate("patients").populate({
-        path: "patients",
-        populate: "doctor",
-      });
-    },
     patients: async () => {
-      return await Patient.find({}).populate("doctor");
+      return await Patient.find({}).populate('doctor');
     },
-    patient: async (parent, {_id}) => {
+    patient: async (parent, { _id }) => {
       return await Patient.findById(_id).populate("doctor");
     },
 
-    thisPatient: async (parent, {_id}, context) => {
+    thisPatient: async (parent, { _id }, context) => {
       if (context.patient) {
         const patient = await Patient.findById(_id).populate("doctor");
         return patient;
@@ -24,22 +19,22 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in to view patient profile");
     },
 
-    patientByName: async (parent, {name}) => {
-      const  params = {}
-      if (name) {
-        params.name = { $regex: name };
-      }
-      return await Patient.find(params).populate("doctor");
-    },
+    // patientByName: async (parent, {name}) => {
+    //   const  params = {}
+    //   if (name) {
+    //     params.name = { $regex: name };
+    //   }
+    //   return await Patient.find(params).populate("doctor");
+    // },
 
     doctors: async () => {
       return await Doctor.find({}).populate("patients");
     },
-    doctor: async (parent, {_id}) => {
+    doctor: async (parent, { _id }) => {
       return await Doctor.findById(_id).populate("patients");
     },
 
-    thisDoctor: async (parent, {_id}, context) => {
+    thisDoctor: async (parent, { _id }, context) => {
       if (context.doctor) {
         const doctor = await Doctor.findById(_id).populate("doctor");
         return doctor;
@@ -47,30 +42,28 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in to view doctor profile");
     },
 
-    doctorByName: async (parent, {name}) => {
-      const  params = {}
-      if (name) {
-        params.name = { $regex: name };
-      }
-      return await Doctor.find(params).populate("doctor");
+    // doctorByName: async (parent, {name}) => {
+    //   const  params = {}
+    //   if (name) {
+    //     params.name = { $regex: name };
+    //   }
+    //   return await Doctor.find(params).populate("doctor");
+    // },
+
+
+    administrators: async () => {
+      return await Administrator.find({})
     },
 
-    administrator: async () => {
-      return {
-        hospitals: await Hospital.find({}).populate("patients").populate({
-          path: "patients",
-          populate: "doctor",
-        }),
-        doctors: await Doctor.find({}).populate("patients"),
-        patients: await Patient.find({}).populate("doctor"),
-      };
+    administrator: async (parent, { _id }) => {
+      return await Administrator.findById(_id)
     },
   },
 
   // Define the functions that will fulfill the mutations
   Mutation: {
     createPatient: async (parent, { _id, name, age, gender, adress, phone, email, password }, context) => {
- 
+
       if (context.administrator) {
         const patient = await Patient.create({ _id, name, age, gender, adress, phone, email, password, }
         )
@@ -82,11 +75,11 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in to create a patient");
     },
 
-    updatePatient: async (parent, { id, name, age, gender, adress, phone, email, password }) => {
+    updatePatient: async (parent, { _id, name, age, gender, adress, phone, email, password }) => {
       // Create and return the new Patient object
       return Patient.findByIdAndUpdate(
-        { _id: id },
-        { $set: { id, name, age, gender, adress, phone, email, password } },
+        _id,
+        { $set: { name, age, gender, adress, phone, email, password } },
         { new: true }
       );
     },
@@ -96,7 +89,7 @@ const resolvers = {
       return Patient.findByIdAndDelete(_id);
     },
 
-    createDoctor: async (parent, { _id, userType, name, email, password, department, officeHours, officeLocation }, context) => {
+    createDoctor: async (parent, { _id, name, email, password, department, officeHours, officeLocation }, context) => {
       // Create and return the new Doctor object
       if (context.administrator) {
         const doctor = await Doctor.create({
@@ -125,9 +118,9 @@ const resolvers = {
 
     // Update Admin section
     updateAdmin: async (parent, { _id, name, email, password, phoneNumber }) => {
-      return Administrator.findByIdAndUpdate(
-        { _id: id },
-        { $set: { _id, name, email, password, phoneNumber } },
+      return await Administrator.findByIdAndUpdate(
+        _id,
+        { $set: { name, email, password, phoneNumber } },
         { new: true }
       );
     },
@@ -137,20 +130,19 @@ const resolvers = {
       return Administrator.findByIdAndDelete(_id);
     },
 
-    updateDoctor: async (parent, { doctorId }, context) => {
-      if (context.user) {
-        return Doctor.findByIdAndUpdate(
-          { _id: doctorId },
-          { $addToSet: { patients: context.user._id } },
-          { new: true }
-        );
-      }
-    },
+    updateDoctor: async (parent, { _id, name, email, password, department, officeHours, officeLocation }) => {
+      return Doctor.findByIdAndUpdate(
+        _id,
+        { $set: { name, email, password, department, officeHours, officeLocation } },
+        { new: true }
+      );
+    }
+  },
 
-    deleteDoctor: async (parent, { _id }) => {
-      return await Doctor.findByIdAndDelete(_id);
-    },
+  deleteDoctor: async (parent, { _id }) => {
+    return await Doctor.findByIdAndDelete(_id);
   },
 };
+
 
 module.exports = resolvers;

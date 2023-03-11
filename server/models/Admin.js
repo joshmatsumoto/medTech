@@ -46,32 +46,32 @@ const administratorSchema = new Schema({
     },
   },
 
-  doctors: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Doctor",
-    },
-  ],
+  // doctors: [
+  //   {
+  //     type: Schema.Types.ObjectId,
+  //     ref: "Doctor",
+  //   },
+  // ],
 
-  patients: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Patient",
-    },
-  ],
+  // patients: [
+  //   {
+  //     type: Schema.Types.ObjectId,
+  //     ref: "Patient",
+  //   },
+  // ],
 
-  hospitals: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Hospital",
-    },
-  ],
-  administrators: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Administrator",
-    }
-  ]
+  // hospitals: [
+  //   {
+  //     type: Schema.Types.ObjectId,
+  //     ref: "Hospital",
+  //   },
+  // ],
+  // administrators: [
+  //   {
+  //     type: Schema.Types.ObjectId,
+  //     ref: "Administrator",
+  //   }
+  // ]
 },
   {
     toJSON: {

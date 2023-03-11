@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "watch": "nodemon",
-    "seed": "node seeders/seeds.js"
+    "seed": "node seeders/seed.js"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +19,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.8",
     "stripe": "^8.67.0",
-    "dayjs": "^1.11.7"
+    "dayjs": "^1.11.7",
+    "@faker-js/faker": "^7.6.0"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",
