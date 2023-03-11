@@ -1,10 +1,10 @@
 // see SignupForm.js for comments
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
-import Auth from '../utils/auth';
+//import Auth from '../utils/auth';
 
 
-const userLogin = () => {
+const DoctorLogin = () => {
   const [doctorFormData, setDoctorFormData] = useState({ email: '', password: '' });
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
@@ -25,15 +25,15 @@ const userLogin = () => {
     }
 
     try {
-      const response =  doctorLogin();
+      const response =  DoctorLogin();
       if (!response.ok) {
         throw new Error('something went wrong!');
       }
 
-      const { token, doctor } = await response.json();
-      console.log(doctor);
-      Auth.login(token);
-      reset()
+     // const { token, doctor } = await response.json();
+     // console.log(doctor);
+      //Auth.login(token);
+//reset()
 
     } catch (err) {
       console.error(err);
@@ -41,7 +41,6 @@ const userLogin = () => {
     }
     
 };
-
   return (
     <>
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
@@ -84,4 +83,4 @@ const userLogin = () => {
   );
 };
 
-export default userLogin;
+export default DoctorLogin;
