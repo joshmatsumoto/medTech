@@ -1,9 +1,9 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 
-function navBar() {
+function NavBar() {
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -13,17 +13,29 @@ function navBar() {
           <Nav className="me-auto">
             <Nav.Link href="#home">Home</Nav.Link>
             <Nav.Link href="#link">Account</Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Administrator</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
+            <NavDropdown title="Administrator" id="admin-dropdown">
+              <NavDropdown.Item href="#view-all-admins">
                 View All Administrators
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Add Administrator</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Sign-Out
+              <NavDropdown.Item href="#add-admin">
+                Add Administrator
               </NavDropdown.Item>
             </NavDropdown>
+            <NavDropdown title="Doctors" id="doc-dropdown">
+              <NavDropdown.Item href="#view-all-docs">
+                View All Doctors
+              </NavDropdown.Item>
+              <NavDropdown.Item href="#add-doc">Add Doctor</NavDropdown.Item>
+            </NavDropdown>
+            <NavDropdown title="Patients" id="pat-dropdown">
+              <NavDropdown.Item href="#view-all-pats">
+                View All Patients
+              </NavDropdown.Item>
+              <NavDropdown.Item href="#add-pat">
+                Add Patient
+              </NavDropdown.Item>
+            </NavDropdown>
+            <Nav.Link href="#sign-out">Sign-Out</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
@@ -31,4 +43,4 @@ function navBar() {
   );
 }
 
-export default navBar;
+export default NavBar;
