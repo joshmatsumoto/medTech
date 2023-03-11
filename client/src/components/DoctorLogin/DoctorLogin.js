@@ -86,4 +86,4 @@ const userLogin = () => {
   );
 };
 
-export default doctorLogin;
+export default userLogin;
