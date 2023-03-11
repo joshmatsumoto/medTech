@@ -6,11 +6,16 @@ import { useMutation } from '@apollo/client';
 
 
 const SignupForm = () => {
+    // set initial form state
   const [doctorFormData, setDoctorFormData] = useState({ email: '', password: '' });
+  // set state for form validation
   const [validated] = useState(false);
+  // set state for alert
   const [showAlert, setShowAlert] = useState(false);
 
+  const [createDoctor, { error }] = useMutation(CREATE_DOCTOR);
 
+};
   return (
     <>
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>

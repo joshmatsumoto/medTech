@@ -6,7 +6,7 @@ const typeDefs = gql`
     name: String
     location: String
     phoneNumber: String
-    doctors:[Doctor]im
+    doctors:[Doctor]
     patients: [Patient]
   }
   type Patient {
