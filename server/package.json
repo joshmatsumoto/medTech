@@ -1,12 +1,12 @@
 {
-  "name": "apollo-school",
+  "name": "mern-server",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "seed": "node seeders/seed.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "nodemon",
+    "seed": "node seeders/seeds.js"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +22,7 @@
     "dayjs": "^1.11.7"
   },
   "devDependencies": {
-    "@faker-js/faker": "^7.6.0"
+    "@faker-js/faker": "^7.6.0",
+    "nodemon": "^2.0.2"
   }
 }
