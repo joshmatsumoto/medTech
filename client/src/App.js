@@ -1,13 +1,18 @@
-import './App.css';
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './styles/custom.min.css';
-import Header from './components/Header/Header';
+import "./App.css";
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "react-datetime/css/react-datetime.css";
+import "./styles/custom.min.css";
+import Header from "./components/Header/Header";
+import AppointmentForm from "./components/AppointmentForm/AppointmentForm";
 
 function App() {
   return (
-    <Header />
-    );
+    <div className="App">
+      <Header />
+      <AppointmentForm />
+    </div>
+  );
 }
 
 export default App;
