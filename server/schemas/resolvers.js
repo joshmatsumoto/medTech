@@ -12,18 +12,49 @@ const resolvers = {
     patients: async () => {
       return await Patient.find({}).populate("doctor");
     },
-    patient: async (parent, args) => {
-      return await Patient.findById(args.id).populate("doctor");
+    patient: async (parent, {_id}) => {
+      return await Patient.findById(_id).populate("doctor");
+    },
+
+    thisPatient: async (parent, {_id}, context) => {
+      if (context.patient) {
+        const patient = await Patient.findById(_id).populate("doctor");
+        return patient;
+      }
+      throw new AuthenticationError("You need to be logged in to view patient profile");
+    },
+
+    patientByName: async (parent, {name}) => {
+      const  params = {}
+      if (name) {
+        params.name = { $regex: name };
+      }
+      return await Patient.find(params).populate("doctor");
     },
 
     doctors: async () => {
-      return await Doctor.find({}).populate("patients")
-        // .populate({
-        //   path: "doctors",
-        //   populate: "patient",
-        // })
-        ;
+      return await Doctor.find({}).populate("patients");
     },
+    doctor: async (parent, {_id}) => {
+      return await Doctor.findById(_id).populate("patients");
+    },
+
+    thisDoctor: async (parent, {_id}, context) => {
+      if (context.doctor) {
+        const doctor = await Doctor.findById(_id).populate("doctor");
+        return doctor;
+      }
+      throw new AuthenticationError("You need to be logged in to view doctor profile");
+    },
+
+    doctorByName: async (parent, {name}) => {
+      const  params = {}
+      if (name) {
+        params.name = { $regex: name };
+      }
+      return await Doctor.find(params).populate("doctor");
+    },
+
     administrator: async () => {
       return {
         hospitals: await Hospital.find({}).populate("patients").populate({
@@ -35,20 +66,13 @@ const resolvers = {
       };
     },
   },
+
   // Define the functions that will fulfill the mutations
   Mutation: {
-    createPatient: async (parent, { _id, userType, name, age, gender, adress, phone, email, password }, context) => {
-      // Create and return the new Patient object
-      if (context.doctor) {
-        const patient = await Patient.create({ _id, userType, name, age, gender, adress, phone, email, password, doctor: context.doctor }
-        )
-        await Doctor.findOneAndUpdate(
-          { _id: context.doctor },
-          { $addToSet: { patients: patient._id } },)
-        return patient;
-      }
+    createPatient: async (parent, { _id, name, age, gender, adress, phone, email, password }, context) => {
+ 
       if (context.administrator) {
-        const patient = await Patient.create({ _id, userType, name, age, gender, adress, phone, email, password, }
+        const patient = await Patient.create({ _id, name, age, gender, adress, phone, email, password, }
         )
         await Administrator.findOneAndUpdate(
           { _id: context.administrator },
@@ -57,6 +81,7 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in to create a patient");
     },
+
     updatePatient: async (parent, { id, name, age, gender, adress, phone, email, password }) => {
       // Create and return the new Patient object
       return Patient.findByIdAndUpdate(
@@ -65,6 +90,7 @@ const resolvers = {
         { new: true }
       );
     },
+
     deletePatient: async (parent, { _id }) => {
       // Create and return the new Patient object
       return Patient.findByIdAndDelete(_id);
@@ -96,6 +122,7 @@ const resolvers = {
     createAdmin: async (parent, { _id, name, email, password, phoneNumber }) => {
       return Administrator.create({ _id, userType, name, email, password, phoneNumber });
     },
+
     // Update Admin section
     updateAdmin: async (parent, { _id, name, email, password, phoneNumber }) => {
       return Administrator.findByIdAndUpdate(
@@ -104,6 +131,7 @@ const resolvers = {
         { new: true }
       );
     },
+
     // Delete Admin Section
     deleteAdmin: async (parent, { _id }) => {
       return Administrator.findByIdAndDelete(_id);
@@ -118,6 +146,7 @@ const resolvers = {
         );
       }
     },
+
     deleteDoctor: async (parent, { _id }) => {
       return await Doctor.findByIdAndDelete(_id);
     },

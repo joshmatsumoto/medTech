@@ -62,10 +62,20 @@ const doctorSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'Hospital'
     }
-
+    
+  },
+  {
+    toJSON: {
+      virtuals: true,
+      getters: true,
+    },
+    id: false,
   }
-);
 
+);
+// doctorSchema.virtual('patients').get(function (){
+//   return this.patients;
+// });
 doctorSchema.pre('save', async function (next) {
   if (this.isNew || this.isModified('password')) {
     const saltRounds = 10;

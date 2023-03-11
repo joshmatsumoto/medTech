@@ -24,7 +24,7 @@ const administratorSchema = new Schema({
       message: (props) => `${props.value} is not a valid email!`,
     },
   },
-  
+
   password: {
     type: String,
     required: true,
@@ -66,7 +66,35 @@ const administratorSchema = new Schema({
       ref: "Hospital",
     },
   ],
-});
+  administrators: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Administrator",
+    }
+  ]
+},
+  {
+    toJSON: {
+      virtuals: true,
+      getters: true,
+    },
+    id: false,
+  }
+
+);
+// administratorSchema.virtual('patients').get(function () {
+//   return this.patients;
+// }),
+//   administratorSchema.virtual('doctors').get(function () {
+//     return this.doctors;
+//   }),
+//   administratorSchema.virtual('hospitals').get(function () {
+//     return this.hospitals;
+//   }),
+//   administratorSchema.virtual('administrators').get(function () {
+//     return this.administrators;
+//   });
+
 
 administratorSchema.pre('save', async function (next) {
   if (this.isNew || this.isModified('password')) {
