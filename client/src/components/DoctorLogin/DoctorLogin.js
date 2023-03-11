@@ -35,20 +35,14 @@ const userLogin = () => {
       const { token, doctor } = await response.json();
       console.log(doctor);
       Auth.login(token);
+      reset()
+
     } catch (err) {
       console.error(err);
       setShowAlert(true);
     }
-    setDoctorFormData({
-      email: '',
-      password: '',
-    });
-
-    reset(),
-};
-
     
-   
+};
 
   return (
     <>
