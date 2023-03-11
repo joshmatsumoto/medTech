@@ -1,9 +1,8 @@
 // see SignupForm.js for comments
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
-
 import Auth from '../utils/auth';
-import doctorLogin from '../utils/doctorLogin';
+
 
 const userLogin = () => {
   const [doctorFormData, setDoctorFormData] = useState({ email: '', password: '' });
@@ -26,8 +25,7 @@ const userLogin = () => {
     }
 
     try {
-      const response =  userLogin(doctorFormData);
-
+      const response =  doctorLogin();
       if (!response.ok) {
         throw new Error('something went wrong!');
       }
