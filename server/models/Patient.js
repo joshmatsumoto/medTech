@@ -60,6 +60,13 @@ const patientSchema = new Schema({
     message: (props) => `${props.value} is not a valid password.`,
   },
 
+  appointments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Appointment",
+    }
+  ],
+
   doctor: {
     type: Schema.Types.ObjectId,
     ref: "Doctor",
@@ -91,6 +98,7 @@ patientSchema.pre('save', async function (next) {
 patientSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
+
 
 
 const Patient = model("Patient", patientSchema);

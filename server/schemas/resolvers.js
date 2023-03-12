@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { Hospital, Patient, Doctor, Administrator } = require("../models");
+const { Hospital, Patient, Doctor, Administrator, Appointment } = require("../models");
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -34,6 +34,11 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in to view doctor profile");
     },
 
+    thisAdministrator: async (parent, { _id }, context) => {
+      if (context.administrator) {
+        const administrator = await Administrator.findById(_id)
+      }
+    },
     administrators: async () => {
       return await Administrator.find({})
     },
@@ -86,83 +91,94 @@ const resolvers = {
       else {
         throw new AuthenticationError('Incorrect username');
       }
-    }
-  },
+    },
 
-  assignDoctor: async (parent, { _id }, context) => {
-    if (context.patient){
-    const doctor = await Doctor.findById(_id);
-    return await Patient.findByIdAndUpdate(context.patient._id, { $push: { doctor: doctor._id } });
-    }
-  },
+    assignDoctor: async (parent, { _id }, context) => {
+      if (context.patient) {
+        const doctor = await Doctor.findById(_id);
+        const patient = await Patient.findByIdAndUpdate(context.patient._id, { $push: { doctor: doctor } }, { new: true });
+        return patient;
+      }
+      throw new AuthenticationError("You need to be logged in to assign a doctor to a patient");
+    },
 
-  assignPatient: async (parent, { _id }, context) => {
-    if (context.doctor){
-    const patient = await Patient.findById(_id);
-    return await Doctor.findByIdAndUpdate(context.doctor._id, { $push: { patient: patient._id } });
-    };
-  },
+    assignPatient: async (parent, { _id }, context) => {
+      if (context.doctor) {
+        const patient = await Patient.findById(_id);
+        const doctor = await Doctor.findByIdAndUpdate(context.doctor._id, { $push: { patients: patient } }, {new: true});
+        return doctor;;
+      };
+      throw new AuthenticationError('could not assign patient');
+    },
 
-  createPatient: async (parent, args, context) => {
-    const patient = await Patient.create(args);
-    const token = signToken(patient);
-    return { token, patient };
-  },
+    createPatient: async (parent, args) => {
+      const patient = await Patient.create(args);
+      const token = signToken(patient);
+      return { token, patient };
+    },
 
-  createDoctor: async (parent, args, context) => {
-    const doctor = await Doctor.create(args);
-    const token = signToken(doctor);
-    return { token, doctor };
-  },
+    createDoctor: async (parent, args) => {
+      const doctor = await Doctor.create(args);
+      const token = signToken(doctor);
+      return { token, doctor };
+    },
 
-  createAdmin: async (parent, args, context) => {
-    const administrator = await Administrator.create(args);
-    const token = signToken(administrator);
-    return { token, administrator };
-  },
+    createAdmin: async (parent, args) => {
+      const administrator = await Administrator.create(args);
+      const token = signToken(administrator);
+      return { token, administrator };
+    },
 
-  // Update Patient section
-  updatePatient: async (parent, { _id, name, age, gender, adress, phone, email, password }) => {
-    return Patient.findByIdAndUpdate(
-      _id,
-      { $set: { name, age, gender, adress, phone, email, password } },
-      { new: true }
-    );
-  },
+    createAppointment: async (parent, args, context) => {
+      if (context.patient) {
+        const appointment = await Appointment.create(args);
+        return await Patient.findByIdAndUpdate(context.patient._id, { $push: { appointment: appointment._id } });
+      };
+    },
 
-  // Update Doctor section
-  updateDoctor: async (parent, { _id, name, email, password, department, officeHours, officeLocation }) => {
-    return Doctor.findByIdAndUpdate(
-      _id,
-      { $set: { name, email, password, department, officeHours, officeLocation } },
-      { new: true }
-    );
-  },
+    // Update Patient section
+    updatePatient: async (parent, { _id, name, age, gender, adress, phone, email, password }) => {
+      return Patient.findByIdAndUpdate(
+        _id,
+        { $set: { name, age, gender, adress, phone, email, password } },
+        { new: true }
+      );
+    },
 
-  // Update Admin section
-  updateAdmin: async (parent, { _id, name, email, password, phoneNumber }) => {
-    return await Administrator.findByIdAndUpdate(
-      _id,
-      { $set: { name, email, password, phoneNumber } },
-      { new: true }
-    );
-  },
+    // Update Doctor section
+    updateDoctor: async (parent, { _id, name, email, password, department, officeHours, officeLocation }) => {
+      return Doctor.findByIdAndUpdate(
+        _id,
+        { $set: { name, email, password, department, officeHours, officeLocation } },
+        { new: true }
+      );
+    },
 
-  // Delete Patient section
-  deletePatient: async (parent, { _id }) => {
-    return Patient.findByIdAndDelete(_id);
-  },
+    // Update Admin section
+    updateAdmin: async (parent, { _id, name, email, password, phoneNumber }) => {
+      return await Administrator.findByIdAndUpdate(
+        _id,
+        { $set: { name, email, password, phoneNumber } },
+        { new: true }
+      );
+    },
 
-  // Delete Doctor section
-  deleteDoctor: async (parent, { _id }) => {
-    return await Doctor.findByIdAndDelete(_id);
-  },
+    // Delete Patient section
+    deletePatient: async (parent, { _id }) => {
+      return Patient.findByIdAndDelete(_id);
+    },
 
-  // Delete Admin Section
-  deleteAdmin: async (parent, { _id }) => {
-    return Administrator.findByIdAndDelete(_id);
-  },
+    // Delete Doctor section
+    deleteDoctor: async (parent, { _id }) => {
+      return await Doctor.findByIdAndDelete(_id);
+    },
 
+    // Delete Admin Section
+    deleteAdmin: async (parent, { _id }) => {
+      return Administrator.findByIdAndDelete(_id);
+    },
+
+  }
 };
 
 

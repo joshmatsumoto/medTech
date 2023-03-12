@@ -5,14 +5,16 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./styles/custom.min.css";
 import Header from "./components/Header/Header";
 import AppointmentForm from "./components/AppointmentForm/AppointmentForm";
+import NewAdmin from "./components/NewAdmin/NewAdmin";
 
 function App() {
   return (
     <div className="App">
       <Header />
       <AppointmentForm />
-    </div>
-  );
-}
+      <NewAdmin />
 
+    </div>
+    );
+}
 export default App;
