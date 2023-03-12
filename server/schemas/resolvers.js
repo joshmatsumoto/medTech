@@ -53,11 +53,10 @@ const resolvers = {
 
   // Define the functions that will fulfill the mutations
   Mutation: {
-    login: async (parent, { email, password }) => {
-      const patient = await Patient.findOne({ email });
-      const doctor = await Doctor.findOne({ email });
-      const administrator = await Administrator.findOne({ email });
-      if (patient){
+    login: async (parent, { userType, email, password }) => {
+     
+      if (userType="patient"){
+        const patient = await Patient.findOne({ email });
         const correctPw = await patient.isCorrectPassword(password);
 
         if (!correctPw) {
@@ -68,7 +67,8 @@ const resolvers = {
   
         return { token, patient };
       }
-      else if (doctor){
+      else if (userType="doctor"){
+        const doctor = await Doctor.findOne({ email });
         const correctPw = await doctor.isCorrectPassword(password);
 
         if (!correctPw) {
@@ -79,11 +79,12 @@ const resolvers = {
   
         return { token, doctor };
       }
-      else if (administrator){
+      else if (userType="administrator"){
+        const administrator = await Administrator.findOne({ email });
         const correctPw = await administrator.isCorrectPassword(password);
 
         if (!correctPw) {
-          throw new AuthenticationError('Incorrect password');
+          throw new AuthenticationError('Incorrect passwword');
         }
   
         const token = signToken(administrator);
