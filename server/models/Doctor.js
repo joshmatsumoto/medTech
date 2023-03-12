@@ -3,6 +3,10 @@ const bcrypt = require('bcrypt');
 
 const doctorSchema = new Schema(
   {
+    userType: {
+      type: String,
+      default: 'doctor'
+    },
     name: {
       type: String,
       required: true,
@@ -48,20 +52,30 @@ const doctorSchema = new Schema(
       type: String,
       required: true
     },
-    Patients: [
+    patients: [
       {
         type: Schema.Types.ObjectId,
         ref: 'Patient'
       }
     ],
-    Hospital: {
+    hospital: {
       type: Schema.Types.ObjectId,
       ref: 'Hospital'
     }
-
+    
+  },
+  {
+    toJSON: {
+      virtuals: true,
+      getters: true,
+    },
+    id: false,
   }
-);
 
+);
+// doctorSchema.virtual('patients').get(function (){
+//   return this.patients;
+// });
 doctorSchema.pre('save', async function (next) {
   if (this.isNew || this.isModified('password')) {
     const saltRounds = 10;
