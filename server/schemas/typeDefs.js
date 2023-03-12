@@ -71,23 +71,23 @@ const typeDefs = gql`
 
   
   type Mutation {
-    login(email: String!, password: String!): Auth
+    login(userType: String!, email: String!, password: String!): Auth
 
-    createDoctor( _id: ID!, name: String!, email:String!, password:String!, department: String!, officeHours: String!, officeLocation: String!): Auth
+    createDoctor(userType: String!, name: String!, email:String!, password:String!, department: String!, officeHours: String!, officeLocation: String!): Auth
+
+    createPatient(userType: String!, name: String!, age: Int!, gender: String!, address: String!, phone: String!, email: String!, password: String!,): Auth
+
+    createAdmin(userType: String!, name: String!, email: String!,password: String!, phoneNumber:String!): Auth
 
     updateDoctor(_id: ID!, name: String, email:String, password:String, department: String, officeHours: String, officeLocation: String): Doctor
 
-    deleteDoctor(_id: ID!): Doctor
-
-    createPatient( _id: ID!, name: String!, age: Int!, gender: String!, address: String!, phone: String!, email: String!, password: String!,): Auth
-
     updatePatient(_id: ID!, name: String, age: Int, gender: String, address: String, phone: String, email: String, password: String,): Patient
 
-    deletePatient(_id: ID!): Patient
-
-    createAdmin( _id: ID!, name: String!, email: String!,password: String!, phoneNumber:String!): Administrator
-
     updateAdmin( _id: ID!, name: String, email: String,password: String, phoneNumber:String): Administrator
+
+    deleteDoctor(_id: ID!): Doctor
+
+    deletePatient(_id: ID!): Patient
 
     deleteAdmin(_id: ID!): Administrator
 

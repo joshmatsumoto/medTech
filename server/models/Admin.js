@@ -46,32 +46,6 @@ const administratorSchema = new Schema({
     },
   },
 
-  // doctors: [
-  //   {
-  //     type: Schema.Types.ObjectId,
-  //     ref: "Doctor",
-  //   },
-  // ],
-
-  // patients: [
-  //   {
-  //     type: Schema.Types.ObjectId,
-  //     ref: "Patient",
-  //   },
-  // ],
-
-  // hospitals: [
-  //   {
-  //     type: Schema.Types.ObjectId,
-  //     ref: "Hospital",
-  //   },
-  // ],
-  // administrators: [
-  //   {
-  //     type: Schema.Types.ObjectId,
-  //     ref: "Administrator",
-  //   }
-  // ]
 },
   {
     toJSON: {
@@ -82,19 +56,6 @@ const administratorSchema = new Schema({
   }
 
 );
-// administratorSchema.virtual('patients').get(function () {
-//   return this.patients;
-// }),
-//   administratorSchema.virtual('doctors').get(function () {
-//     return this.doctors;
-//   }),
-//   administratorSchema.virtual('hospitals').get(function () {
-//     return this.hospitals;
-//   }),
-//   administratorSchema.virtual('administrators').get(function () {
-//     return this.administrators;
-//   });
-
 
 administratorSchema.pre('save', async function (next) {
   if (this.isNew || this.isModified('password')) {
