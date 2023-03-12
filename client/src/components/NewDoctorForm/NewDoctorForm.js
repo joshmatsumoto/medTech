@@ -1,74 +1,69 @@
 import React from 'react';
 
-import { Form, Button, Alert } from 'react-bootstrap';
-
-import { useMutation } from '@apollo/client';
+import {Container, Form, Row, Col, Button, } from 'react-bootstrap';
 
 
-const SignupForm = () => {
-    // set initial form state
-  const [doctorFormData, setDoctorFormData] = useState({ email: '', password: '' });
-  // set state for form validation
-  const [validated] = useState(false);
-  // set state for alert
-  const [showAlert, setShowAlert] = useState(false);
 
-  const [createDoctor, { error }] = useMutation(CREATE_DOCTOR);
 
-};
-return (
-    <>
-      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-        <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-          Something went wrong with your login credentials!
-        </Alert>
-        form
-        <Form.Group>
-          <Form.Label htmlFor='name'>name</Form.Label>
-          <Form.Control
-            type='text'
-            placeholder='Your Name'
-            name='name'
-            onChange={handleInputChange}
-            value={doctorFormData.name}
-            required
-          />
-          <Form.Control.Feedback type='invalid'>Name is required!</Form.Control.Feedback>
-        </Form.Group>
+const DoctorForm = () => {
 
-        <Form.Group>
-          <Form.Label htmlFor='email'>Email</Form.Label>
-          <Form.Control
-            type='text'
-            placeholder='Your email'
-            name='email'
-            onChange={handleInputChange}
-            value={doctorFormData.email}
-            required
-          />
-          <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group>
-          <Form.Label htmlFor='password'>Password</Form.Label>
-          <Form.Control
-            type='password'
-            placeholder='Your password'
-            name='password'
-            onChange={handleInputChange}
-            value={doctorFormData.password}
-            required
-          />
-          <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
-        </Form.Group>
-        <Button
-          disabled={!(doctorFormData.email && doctorFormData.password)}
-          type='submit'
-          variant='success'>
-          Submit
-        </Button>
-      </Form>
-    </>
-  );
-};
 
-export default userLogin;
+  return(
+  <Container className='text-dark text-start'>
+    <Form>
+      <Row>
+        <Col md={{ span: 6, offset: 3 }}>
+          <Form.Group className='mb-3' controlId='doctorsName'>
+            <Form.Label>Doctor's Name</Form.Label>
+            <Form.Control placeholder="Enter Doctor's name" />
+          </Form.Group>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col md={{ span: 6, offset: 3 }}>
+          <Form.Group className='mb-3' controlId='doctorsEmail'>
+            <Form.Label>Doctor's Email</Form.Label>
+            <Form.Control type="email" placeholder="Enter Doctor's email" />
+          </Form.Group>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col md={{ span: 6, offset: 3 }}>
+          <Form.Group className="mb-3" controlId="Department">
+            <Form.Label>Department </Form.Label>
+            <Form.Control placeholder="Department" />
+          </Form.Group>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col md={{ span: 6, offset: 3 }}>
+          <Form.Group className="mb-3" controlId="formGridAddress2">
+            <Form.Label>Office Hours</Form.Label>
+            <Form.Control placeholder="Office Hours" />
+          </Form.Group>
+        </Col>
+      </Row>
+
+      <Row className="mb-3">
+        <Col md={{ span: 6, offset: 3 }}>
+          <Form.Group className='mb-3' id='formGridCheckbox'>
+            <Form.Check type='checkbox' label='Check me out' />
+          </Form.Group>
+        </Col>
+      </Row>
+
+      <Row className="mb-3">
+        <Col md={{ span: 6, offset: 3 }}>
+          <Button variant='primary' type='submit'>
+            Submit
+          </Button>
+        </Col>
+      </Row>
+    </Form>
+  </Container>
+);
+}
+export default DoctorForm;
