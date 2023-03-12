@@ -1,7 +1,7 @@
 import "./App.css";
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "react-datetime/css/react-datetime.css";
+import "react-datepicker/dist/react-datepicker.css";
 import "./styles/custom.min.css";
 import Header from "./components/Header/Header";
 import AppointmentForm from "./components/AppointmentForm/AppointmentForm";
