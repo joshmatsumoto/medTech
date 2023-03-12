@@ -136,12 +136,13 @@ const resolvers = {
         { $set: { name, email, password, department, officeHours, officeLocation } },
         { new: true }
       );
-    }
+    }, 
+    deleteDoctor: async (parent, { _id }) => {
+      return await Doctor.findByIdAndDelete(_id);
+    },
   },
 
-  deleteDoctor: async (parent, { _id }) => {
-    return await Doctor.findByIdAndDelete(_id);
-  },
+
 };
 
 
