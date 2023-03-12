@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { Hospital, Patient, Doctor, Administrator } = require("../models");
+const { Hospital, Patient, Doctor, Administrator, Appointment } = require("../models");
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -34,6 +34,11 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in to view doctor profile");
     },
 
+    // thisAdministrator: async (parent, { _id }, context) => {
+    //   if (context.administrator) {
+    //     const administrator = await Administrator.findById(_id)
+    //   }
+    // }, 
     administrators: async () => {
       return await Administrator.find({})
     },
@@ -46,7 +51,7 @@ const resolvers = {
   // Define the functions that will fulfill the mutations
   Mutation: {
     login: async (parent, { userType, email, password }) => {
-
+      
       if (userType = "patient") {
         const patient = await Patient.findOne({ email });
         const correctPw = await patient.isCorrectPassword(password);
@@ -89,21 +94,23 @@ const resolvers = {
     }
   },
 
-  assignDoctor: async (parent, { _id }, context) => {
-    if (context.patient){
-    const doctor = await Doctor.findById(_id);
-    return await Patient.findByIdAndUpdate(context.patient._id, { $push: { doctor: doctor._id } });
-    }
-  },
+  // assignDoctor: async (parent, { _id }, context) => {
+  //   if (context.patient){
+  //   const doctor = await Doctor.findById(_id);
+  //   const patient = await Patient.findByIdAndUpdate(context.patient._id, { $push: { doctor: doctor._id } });
+  //   return { patient };
+  //   }
+  // },
 
-  assignPatient: async (parent, { _id }, context) => {
-    if (context.doctor){
-    const patient = await Patient.findById(_id);
-    return await Doctor.findByIdAndUpdate(context.doctor._id, { $push: { patient: patient._id } });
-    };
-  },
+  // assignPatient: async (parent, { _id }, context) => {
+  //   if (context.doctor){
+  //   const patient = await Patient.findById(_id);
+  //   const doctor = await Doctor.findByIdAndUpdate(context.doctor._id, { $push: { patient: patient._id } });
+  //   return { doctor };
+  //   };
+  // },
 
-  createPatient: async (parent, args, context) => {
+  createPatient: async (parent, args,) => {
     const patient = await Patient.create(args);
     const token = signToken(patient);
     return { token, patient };
@@ -119,6 +126,13 @@ const resolvers = {
     const administrator = await Administrator.create(args);
     const token = signToken(administrator);
     return { token, administrator };
+  },
+
+  createAppointment: async (parent, args, context) => {
+    if (context.patient){
+      const appointment = await Appointment.create(args);
+      return await Patient.findByIdAndUpdate(context.patient._id, { $push: { appointment: appointment._id } });
+    };
   },
 
   // Update Patient section

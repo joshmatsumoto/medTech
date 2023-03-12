@@ -1,6 +1,7 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+
   type Hospital {
     _id: ID!
     name: String
@@ -9,6 +10,7 @@ const typeDefs = gql`
     doctors:[Doctor]
     patients: [Patient]
   }
+
   type Patient {
     _id: ID!
     userType: String
@@ -19,8 +21,10 @@ const typeDefs = gql`
     phone: String
     email: String
     password: String
+    appointments: [Appointment]
     doctor: Doctor
   }
+
   type Doctor {
     _id: ID!
     userType: String
@@ -34,6 +38,7 @@ const typeDefs = gql`
     patients: [Patient]
     hospital: Hospital
   }
+
   type Administrator {
   _id: ID!
   userType: String
@@ -41,6 +46,12 @@ const typeDefs = gql`
   email: String
   password: String
   phone: String
+  }
+
+  type Appointment{
+  _id: ID!
+  dateTime: String
+  reason: String
   }
 
   type Query {
@@ -73,15 +84,13 @@ const typeDefs = gql`
   type Mutation {
     login(userType: String!, email: String!, password: String!): Auth
 
-    assignDoctor(_id: ID!): Patient
-
-    assignPatient(_id: ID!): Doctor
-
     createDoctor(userType: String!, name: String!, email:String!, password:String!, department: String!, officeHours: String!, officeLocation: String!): Auth
 
     createPatient(userType: String!, name: String!, age: Int!, gender: String!, address: String!, phone: String!, email: String!, password: String!,): Auth
 
     createAdmin(userType: String!, name: String!, email: String!,password: String!, phoneNumber:String!): Auth
+
+    createAppointment(_id: ID!, dateTime: String!, reason: String!): Appointment
 
     updateDoctor(_id: ID!, name: String, email:String, password:String, department: String, officeHours: String, officeLocation: String): Doctor
 
