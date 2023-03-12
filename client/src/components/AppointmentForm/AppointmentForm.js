@@ -7,6 +7,7 @@ import DatePicker from "react-datepicker";
 import { setHours, setMinutes } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 import Button from "react-bootstrap/Button";
+// import { useMutation } from "@apollo/client";
 
 function AppointmentForm() {
   const [startDate, setStartDate] = useState(new Date());
@@ -17,29 +18,41 @@ function AppointmentForm() {
     return currentDate.getTime() < selectedDate.getTime();
   };
 
+  const [validated, setValidated] = useState(false);
+
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    setValidated(true);
+  }
+
   return (
     <div className="appointmentForm">
       <Container fluid className="bg-primary text-light p-4">
         <h1>Create A New Appointment </h1>
       </Container>
       <Container className="text-dark text-start mt-5 pt-5">
-        <Form>
+        <Form validated={validated} onSubmit={handleSubmit}>
           <Row>
             <Col md={{ span: 6, offset: 3 }}>
               <Form.Group className="mb-3" controlId="patientsName">
-                <Form.Control placeholder="Patients Name Here" />
+                <Form.Control required placeholder="Patients Name Here" />
               </Form.Group>
               <Form.Group className="mb-3" controlId="patientsEmail">
-                <Form.Control placeholder="Patients Email Here" />
+                <Form.Control required placeholder="Patients Email Here" />
               </Form.Group>
             </Col>
             <Col md={{ span: 3, offset: 3 }}>
               <Form.Group className="mb-3" controlId="selectDoctor">
-                <Form.Select>
-                  <option disabled>...Select A Doctor</option>
-                  <option>Doctor 1</option>
-                  <option>Doctor 2</option>
-                  <option>Doctor 3</option>
+                <Form.Select placeholder="...Select A Doctor">
+                  <option value={1}>...Select A Doctor</option>
+                  <option value={2}>Doctor 1</option>
+                  <option value={3}>Doctor 2</option>
+                  <option value={4}>Doctor 3</option>
                 </Form.Select>
               </Form.Group>
             </Col>
