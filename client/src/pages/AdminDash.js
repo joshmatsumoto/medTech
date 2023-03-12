@@ -3,7 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
-function NavBar() {
+function adminNavBar() {
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -43,4 +43,4 @@ function NavBar() {
   );
 }
 
-export default NavBar;
+export default adminNavBar;

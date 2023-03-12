@@ -1,8 +1,8 @@
 // see SignupForm.js for comments
 import React, { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
+import { Container, Form, Row ,Col , Button, Alert } from 'react-bootstrap';
 //import Auth from '../utils/auth';
-const AdminList = () => {
+const AdminLogin = () => {
   const [adminFormData, setAdminFormData] = useState({ email: '', password: '' });
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
@@ -19,12 +19,12 @@ const AdminList = () => {
       event.stopPropagation();
     }
     try {
-      const response = AdminList();
+      const response =  AdminLogin();
       if (!response.ok) {
         throw new Error('something went wrong!');
       }
-     // const { token, doctor } = await response.json();
-     // console.log(doctor);
+     // const { token, administrator } = await response.json();
+     // console.log(administrator );
       //Auth.login(token);
 //reset()
     } catch (err) {
@@ -33,12 +33,14 @@ const AdminList = () => {
     }
 };
   return (
-    <>
+    <Container className='text-dark text-start'>
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
         <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
           Something went wrong with your login credentials!
         </Alert>
-        <Form.Group>
+        <Row>
+        <Col md={{ span: 6, offset: 3 }}>
+        <Form.Group className= "mb-3" controlId= "doctorsName">
           <Form.Label htmlFor='email'>Email</Form.Label>
           <Form.Control
             type='text'
@@ -50,6 +52,10 @@ const AdminList = () => {
           />
           <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
         </Form.Group>
+        </Col>
+        </Row>
+        <Row>
+        <Col md={{ span: 6, offset: 3 }}>
         <Form.Group>
           <Form.Label htmlFor='password'>Password</Form.Label>
           <Form.Control
@@ -62,14 +68,21 @@ const AdminList = () => {
           />
           <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
         </Form.Group>
+        </Col>
+        </Row>
+        <Row>
+        <Col md={{ span: 6, offset: 3 }}>
         <Button
           disabled={!(adminFormData.email && adminFormData.password)}
           type='submit'
           variant='success'>
           Submit
         </Button>
+        </Col>
+        </Row>
       </Form>
-    </>
+    </Container>
   );
 };
-export default AdminList;
+
+export default AdminLogin;
