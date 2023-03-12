@@ -3,6 +3,8 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import Datetime from "react-datetime";
+import moment from "moment";
+import Button from "react-bootstrap/Button";
 
 function AppointmentForm() {
   return (
@@ -28,8 +30,13 @@ function AppointmentForm() {
             </Form.Group>
           </Col>
           <Col md={{ span: 3 }}>
-            <Form.Group>
-              <Datetime />
+            <Form.Group controlId="appointmentDate">
+                <Datetime placeholder="Select Appointment Date" />
+            </Form.Group>
+          </Col>
+          <Col md={{ span: 6, offset: 3 }}>
+            <Form.Group controlId="appointmentMessage">
+            <Form.Control as="textarea" rows={5} placeholder="Leave a Message for your Doctor here..." />
             </Form.Group>
           </Col>
         </Row>
