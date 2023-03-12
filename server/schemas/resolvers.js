@@ -86,9 +86,21 @@ const resolvers = {
       else {
         throw new AuthenticationError('Incorrect username');
       }
-
-
     }
+  },
+
+  assignDoctor: async (parent, { _id }, context) => {
+    if (context.patient){
+    const doctor = await Doctor.findById(_id);
+    return await Patient.findByIdAndUpdate(context.patient._id, { $push: { doctor: doctor._id } });
+    }
+  },
+
+  assignPatient: async (parent, { _id }, context) => {
+    if (context.doctor){
+    const patient = await Patient.findById(_id);
+    return await Doctor.findByIdAndUpdate(context.doctor._id, { $push: { patient: patient._id } });
+    };
   },
 
   createPatient: async (parent, args, context) => {

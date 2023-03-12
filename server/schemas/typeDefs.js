@@ -73,7 +73,9 @@ const typeDefs = gql`
   type Mutation {
     login(userType: String!, email: String!, password: String!): Auth
 
-    assignDoctor(doctorId: ID!, patientId: ID!): Auth
+    assignDoctor(_id: ID!): Patient
+
+    assignPatient(_id: ID!): Doctor
 
     createDoctor(userType: String!, name: String!, email:String!, password:String!, department: String!, officeHours: String!, officeLocation: String!): Auth
 
