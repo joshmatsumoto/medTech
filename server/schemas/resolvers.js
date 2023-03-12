@@ -42,15 +42,6 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in to view doctor profile");
     },
 
-    // doctorByName: async (parent, {name}) => {
-    //   const  params = {}
-    //   if (name) {
-    //     params.name = { $regex: name };
-    //   }
-    //   return await Doctor.find(params).populate("doctor");
-    // },
-
-
     administrators: async () => {
       return await Administrator.find({})
     },
@@ -62,6 +53,52 @@ const resolvers = {
 
   // Define the functions that will fulfill the mutations
   Mutation: {
+    login: async (parent, { email, password }) => {
+      const patient = await Patient.findOne({ email });
+      const doctor = await Doctor.findOne({ email });
+      const administrator = await Administrator.findOne({ email });
+      if (patient){
+        const correctPw = await patient.isCorrectPassword(password);
+
+        if (!correctPw) {
+          throw new AuthenticationError('Incorrect password');
+        }
+  
+        const token = signToken(patient);
+  
+        return { token, patient };
+      }
+      else if (doctor){
+        const correctPw = await doctor.isCorrectPassword(password);
+
+        if (!correctPw) {
+          throw new AuthenticationError('Incorrect password');
+        }
+  
+        const token = signToken(doctor);
+  
+        return { token, doctor };
+      }
+      else if (administrator){
+        const correctPw = await administrator.isCorrectPassword(password);
+
+        if (!correctPw) {
+          throw new AuthenticationError('Incorrect password');
+        }
+  
+        const token = signToken(administrator);
+  
+        return { token, administrator };
+      }
+      else {
+        throw new AuthenticationError('Incorrect username');
+      }
+
+
+    }
+  }
+};
+
     createPatient: async (parent, args, context) => {
       const patient = await Patient.create(args);
       const token = signToken(patient);
