@@ -1,4 +1,3 @@
-// see SignupForm.js for comments
 import React, { useState } from 'react';
 import { Container, Form, Row ,Col , Button, Alert } from 'react-bootstrap';
 //import Auth from '../utils/auth';
