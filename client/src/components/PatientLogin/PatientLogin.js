@@ -23,8 +23,8 @@ const PatientLogin = () => {
         if (!response.ok) {
           throw new Error('something went wrong!');
         }
-       // const { token, administrator } = await response.json();
-       // console.log(administrator );
+       // const { token, patient } = await response.json();
+       // console.log(patient );
         //Auth.login(token);
   //reset()
       } catch (err) {
