@@ -1,11 +1,16 @@
 import { Link } from 'react-router-dom';
 
 const Home = () => {
-    const { loading, data } = useQuery(GET_POSTS);
+    const { loading, data } = useQuery();
     fet
     const posts = data?.posts || [];
     return (
-        <div>
-            <h1 style="text-align :center">Welcome to Our Clinic</h1>
-            {loading? (
-                <div>Loading...</div>
+       <>
+       <container fluid>
+        <img src={medTechLogo2} alt="medTech Logo" className="App-logo" /> 
+       </>
+    )
+};
+
+
+export default Home;
