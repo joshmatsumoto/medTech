@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Form, Row ,Col , Button, Alert, Modal} from 'react-bootstrap';
-import AdminLogin from "../AdminLogin/AdminLogin";
+import PatientForm from '../NewPatientForm/NewPatientForm';
 //import Auth from '../utils/auth';
 
 
@@ -95,13 +95,13 @@ const PatientLogin = () => {
           </Col>
           </Row>
         </Form>
-        {/* Modal */}
+
         <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>AdminLogin</Modal.Title>
+          <Modal.Title>PatientForm</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <AdminLogin />
+            <PatientForm/>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
