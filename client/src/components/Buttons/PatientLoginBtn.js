@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import AdminLogin from "../AdminLogin/AdminLogin";
-import DoctorLogin from "../DoctorLogin/DoctorLogin";
+import PatientForm from "../NewPatientForm/NewPatientForm";
 import { Col, Row, Button, Modal } from "react-bootstrap";
-function Buttons() {
+
+function patientBtn() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -16,36 +16,22 @@ function Buttons() {
             className="my-5 d-flex justify-content-between"
             md={{ span: 6, offset: 3 }}
           >
+
             <Button variant="primary" onClick={handleShow}>
-              AdminLogin
-            </Button>
-            <Button variant="primary" onClick={handleShow}>
-              DoctorLogin
+              Create New Patient
             </Button>
           </Col>
         </Row>
       </div>
 
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>AdminLogin</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <AdminLogin />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
+
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>DoctorLogin</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <DoctorLogin />
+          <PatientForm/>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -57,4 +43,4 @@ function Buttons() {
   );
 }
 
-export default Buttons;
+export default patientBtn;
