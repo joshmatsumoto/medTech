@@ -32,6 +32,7 @@ function App() {
       <NewDoctorForm /> */}
       <Footer></Footer>
       {/* <NewAdminForm/> */}
+      <SafetyTips />
     </div>
   );
 }
