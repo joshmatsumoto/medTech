@@ -2,6 +2,10 @@ const { Schema, model } = require("mongoose");
 const bcrypt = require('bcrypt');
 
 const patientSchema = new Schema({
+  userType: {
+    type: String,
+    default: 'patient'
+  },
   name: {
     type: String,
     required: true,
@@ -56,13 +60,31 @@ const patientSchema = new Schema({
     message: (props) => `${props.value} is not a valid password.`,
   },
 
-  
+  appointments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Appointment",
+    }
+  ],
 
-  Doctor: {
+  doctor: {
     type: Schema.Types.ObjectId,
     ref: "Doctor",
   },
-});
+},
+{
+  toJSON: {
+    virtuals: true,
+    getters: true,
+  },
+  id: false,
+}
+
+);
+// patientSchema.virtual('pdoctor').get(function (){
+// return this.pdoctor;
+// });
+
 
 patientSchema.pre('save', async function (next) {
   if (this.isNew || this.isModified('password')) {
@@ -76,6 +98,7 @@ patientSchema.pre('save', async function (next) {
 patientSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
+
 
 
 const Patient = model("Patient", patientSchema);

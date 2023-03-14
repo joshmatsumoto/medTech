@@ -1,25 +1,29 @@
 {
-  "name": "apollo-school",
+  "name": "mern-server",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "seed": "node seeders/seed.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "nodemon",
+    "seed": "node seeders/seed.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "apollo-server-express": "^3.6.1",
-    "dayjs": "^1.11.7",
+    "bcrypt": "^4.0.1",
     "express": "^4.17.2",
-    "graphql": "^16.2.0",
-    "jsonwebtoken": "^9.0.0",
-    "mongoose": "^6.1.6"
+    "graphql": "^16.3.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.8",
+    "stripe": "^8.67.0",
+    "dayjs": "^1.11.7",
+    "@faker-js/faker": "^7.6.0"
   },
   "devDependencies": {
-    "@faker-js/faker": "^7.6.0"
+    "@faker-js/faker": "^7.6.0",
+    "nodemon": "^2.0.2"
   }
 }

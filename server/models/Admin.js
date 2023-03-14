@@ -2,6 +2,10 @@ const { Schema, model } = require("mongoose");
 const bcrypt = require('bcrypt');
 
 const administratorSchema = new Schema({
+  userType: {
+    type: String,
+    default: 'administrator'
+  },
   name: {
     type: String,
     required: true,
@@ -20,7 +24,7 @@ const administratorSchema = new Schema({
       message: (props) => `${props.value} is not a valid email!`,
     },
   },
-  
+
   password: {
     type: String,
     required: true,
@@ -42,27 +46,16 @@ const administratorSchema = new Schema({
     },
   },
 
-  doctors: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Doctor",
+},
+  {
+    toJSON: {
+      virtuals: true,
+      getters: true,
     },
-  ],
+    id: false,
+  }
 
-  patients: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Patient",
-    },
-  ],
-
-  hospitals: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Hospital",
-    },
-  ],
-});
+);
 
 administratorSchema.pre('save', async function (next) {
   if (this.isNew || this.isModified('password')) {

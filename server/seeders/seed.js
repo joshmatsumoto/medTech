@@ -14,12 +14,13 @@ connection.once('open', async () => {
 
   for (let i = 0; i < 3; i++) {
     doctors.push({
+      userType: 'doctor',
       name: `Dr. ${faker.name.fullName()}`,
       department: 'General Medicine',
       doctorScore: faker.datatype.number({ min: 3, max: 5, precision: 0.1 }),
       officeHours: '9:00 AM - 5:00 PM',
       officeLocation: `Office Number ${faker.datatype.number({ min: 1001, max: 5050})}`,
-  
+      email: faker.internet.email(),
     });
   }
 
@@ -29,6 +30,7 @@ connection.once('open', async () => {
 
   for (let i = 0; i < 9; i++) {
     patients.push({
+      userType: 'patient',
       name: faker.name.fullName(),
       age: dayjs(faker.date.birthdate({
         max: 65,
@@ -57,6 +59,7 @@ connection.once('open', async () => {
   const admins = [];
   for (let i = 0; i < 1; i++) {
     admins.push({
+      userType: 'admin',
       name: faker.name.fullName({firstName: 'John', lastName: 'Doe',}),
       email: faker.internet.email('John', 'Doe'),
       phoneNumber: '555-555-555'

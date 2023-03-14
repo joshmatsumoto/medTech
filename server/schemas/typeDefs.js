@@ -1,16 +1,19 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+
   type Hospital {
-    _id: ID
+    _id: ID!
     name: String
     location: String
     phoneNumber: String
     doctors:[Doctor]
     patients: [Patient]
   }
+
   type Patient {
-    _id: ID
+    _id: ID!
+    userType: String
     name: String
     age: Int
     gender: String
@@ -18,10 +21,13 @@ const typeDefs = gql`
     phone: String
     email: String
     password: String
+    appointments: [Appointment]
     doctor: Doctor
   }
+
   type Doctor {
-    _id: ID
+    _id: ID!
+    userType: String
     name: String
     email: String
     password: String
@@ -32,40 +38,76 @@ const typeDefs = gql`
     patients: [Patient]
     hospital: Hospital
   }
-  type Admin {
-  _id: ID
+
+  type Administrator {
+  _id: ID!
+  userType: String
   name: String
   email: String
   password: String
   phone: String
-  doctors: [Doctor]
-  patients: [Patient]
-  hospitals: [Hospital]
+  }
+
+  type Appointment{
+  _id: ID!
+  dateTime: String
+  reason: String
   }
 
   type Query {
     hospitals: [Hospital]
+    hospital(_id: ID!): Hospital
     patients: [Patient]
+    patient(_id: ID!): Patient
+    thisPatient: Patient
     doctors: [Doctor]
-    patient(id: ID!): Patient
-    admin(username: String!, password: String!): Admin
+    doctor(_id: ID!): Doctor
+    thisDoctor: Doctor
+    administrators: [Administrator]
+    thisAdministrator: Administrator
+    administrator(_id:ID!): Administrator
+
+  }
+  type Auth {
+    token: ID
+    Administrator:Administrator
+  }
+  type Auth {
+    token: ID
+    Patient:Patient
+  }
+  type Auth {
+    token: ID
+    Doctor:Doctor
   }
 
   
   type Mutation {
-    login(email: String!, password: String!): Auth
-    createDoctor(name: String!, officeHours: String!, officeLocation: String!, doctorScore: Float): Doctor
-    updateDoctor(id: ID!, name: String, officeHours: String, officeLocation: String doctorScore: Float): Doctor
-    deleteDoctor(id: ID!): Doctor
-    getallDoctors: [Doctor]
-    getallPatients: [Patient]
-    createPatient(name: String!, department: String!, creditHours: Int!): Patient
-    updatePatient(id: ID!, name: String, department: String, creditHours: Int): Patient
-    deletePatient(id: ID!): Patient
-    createAdmin(name: String!, email: String!, username: String!, password: String!): Admin
-    updateAdmin(id: ID!, name: String, email: String, username: String, password: String): Admin
-    deleteAdmin(id: ID!): Admin
-    getallAdmin: [Admin]
+    login(userType: String!, email: String!, password: String!): Auth
+    
+    assignDoctor(patient:ID!): Patient
+
+    assignPatient(doctor:ID!): Doctor
+
+    createDoctor(userType: String!, name: String!, email:String!, password:String!, department: String!, officeHours: String!, officeLocation: String!): Auth
+
+    createPatient(userType: String!, name: String!, age: Int!, gender: String!, address: String!, phone: String!, email: String!, password: String!,): Auth
+
+    createAdmin(userType: String!, name: String!, email: String!,password: String!, phoneNumber:String!): Auth
+
+    createAppointment(_id: ID!, dateTime: String!, reason: String!): Appointment
+
+    updateDoctor(_id: ID!, name: String, email:String, password:String, department: String, officeHours: String, officeLocation: String): Doctor
+
+    updatePatient(_id: ID!, name: String, age: Int, gender: String, address: String, phone: String, email: String, password: String,): Patient
+
+    updateAdmin( _id: ID!, name: String, email: String,password: String, phoneNumber:String): Administrator
+
+    deleteDoctor(_id: ID!): Doctor
+
+    deletePatient(_id: ID!): Patient
+
+    deleteAdmin(_id: ID!): Administrator
 
 
   }
