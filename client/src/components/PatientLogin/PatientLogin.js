@@ -78,18 +78,20 @@ const PatientLogin = () => {
           </Row>
           <Row>
           <Col className='mt-4 d-flex justify-content-center'md={{ span: 6, offset: 3 }}>
-          <Button
-            disabled={!(patientFormData.email && patientFormData.password)}
-            type='submit'
-            variant='success'>
-            Submit
-          </Button>
+            <div className='gap-3 d-flex'>
           <Button
             disabled={!(patientFormData.email && patientFormData.password)}
             type='submit'
             variant='success'>
             Create New Patient
           </Button>
+          <Button
+            disabled={!(patientFormData.email && patientFormData.password)}
+            type='submit'
+            variant='success'>
+            Submit
+          </Button>
+          </div>
           </Col>
           </Row>
         </Form>
