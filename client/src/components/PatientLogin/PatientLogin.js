@@ -71,7 +71,7 @@ const PatientLogin = () => {
           </Col>
           </Row>
           <Row>
-          <Col md={{ span: 6, offset: 3 }}>
+          <Col className='mt-4 d-flex justify-content-center'md={{ span: 6, offset: 3 }}>
           <Button
             disabled={!(patientFormData.email && patientFormData.password)}
             type='submit'
