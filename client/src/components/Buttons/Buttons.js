@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import AdminLogin from '../AdminLogin/AdminLogin';
-import { render } from '@testing-library/react';
-function Example() {
+
+function Buttons() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -12,7 +12,7 @@ function Example() {
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
+        AdminLogin
       </Button>
 
       <Modal show={show} onHide={handleClose}>
@@ -35,4 +35,4 @@ function Example() {
   );
 }
 
-render(<Example />);
+export default Buttons;

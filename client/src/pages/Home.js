@@ -9,7 +9,7 @@ import PatientLogin from '../components/PatientLogin/PatientLogin';
 //import { useForm } from'react-hook-form';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
-
+import Buttons from '../components/Buttons/Buttons';
 
 const Home = () => {
 
@@ -18,6 +18,7 @@ const Home = () => {
 
              <Header/>
              <PatientLogin/>
+             <Buttons/>
              <Footer/>    
       </>  
      );
