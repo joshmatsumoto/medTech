@@ -19,16 +19,16 @@ import Footer from './components/Footer/Footer';
 function App() {
   return (
     <div className="App">
-      <>
-        <Router>
-          <Header />
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-          </Routes>
-        </Router>
-      </>
-
+      <Router>
       <Header />
+
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+
+      </Routes>
+
+      </Router>
+
       {/* <AdminDash /> */}
       {/* <AdminLogin />
       <AppointmentForm />
