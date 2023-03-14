@@ -1,5 +1,5 @@
 import Container from 'react-bootstrap/Container';
-import medTechLogo from '../../assets/medTechLogoNoWhite.png';
+import medTechLogo from '../../assets/medtechlogoonly-removebg-preview.png';
 
 function Footer() {
   return (
@@ -10,4 +10,3 @@ function Footer() {
 }
 
 export default Footer;
-

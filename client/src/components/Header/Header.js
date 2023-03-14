@@ -1,5 +1,5 @@
 import Container from 'react-bootstrap/Container';
-import medTechLogo2 from '../../assets/medtechlogoonly-removebg-preview.png';
+import medTechLogo2 from '../../assets/medTechLogoNoWhite.png';
 
 function Header() {
     return (
@@ -10,4 +10,3 @@ function Header() {
 }
 
 export default Header;
-
