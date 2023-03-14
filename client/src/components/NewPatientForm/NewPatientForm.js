@@ -32,14 +32,7 @@ function PatientForm() {
           </Col>
         </Row>
 
-        <Row className="mb-3">
-          <Col md={{ span: 6, offset: 3 }}>
-            <Form.Group className="mb-3" controlId="formGridAddress2">
-              <Form.Label>Address 2</Form.Label>
-              <Form.Control placeholder="Apartment, studio, or floor" />
-            </Form.Group>
-          </Col>
-        </Row>
+
 
         <Row className="mb-3">
           <Col md={{ span: 6, offset: 3 }}>

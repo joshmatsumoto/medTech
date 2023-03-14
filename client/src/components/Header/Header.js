@@ -1,15 +1,10 @@
 import Container from 'react-bootstrap/Container';
-// import Image from 'react-bootstrap/Image';
-import Navigation from '../Navigation/Navigation';
+import medTechLogo2 from '../../assets/medTechLogoNoWhite.png';
 
 function Header() {
     return (
         <Container fluid>
-            <h1 className='text-secondary'>
-                MedTech
-            </h1>
-
-            <Navigation />
+            <img src={medTechLogo2} alt="medTech Logo"/>
         </Container>
     );
 }
