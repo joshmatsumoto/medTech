@@ -1,32 +1,24 @@
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
+//import React, { useState } from'react';
+//import Container from'react-bootstrap/Container';   
+//import Button from'react-bootstrap/Button';
+import PatientLogin from '../components/PatientLogin/PatientLogin';
+//import medTechLogo from './medTechLogo.png';
+//import medTechLogo2 from './medTechLogo2.png';
+//import './App.css';
+//import { useForm } from'react-hook-form';
+import Header from '../components/Header/Header';
+import Footer from '../components/Footer/Footer';
+
 
 const Home = () => {
 
     return (
         <>
-        <Container fluid>
-         <img src={medTechLogo2} alt="medTech Logo" className="App-logo" /> 
-         <h1 className="App-title">MedTech</h1>
-         </Container>
-     
-         <Form noValidate validated={validated} onSubmit={handleSubmit}>
-             {showAlert && ( 
-                 <Alert dismissible onClose={() => setShowAlert(false)} variant='danger'>
-                     Something went wrong with your login or password!   
-                 </Alert> 
-             )}
-     
-             <div className='text-dark text-start'> 
-                 <Link to="/PatientLogin">Patient Login</Link> 
-                 <PatientLogin/>  
-             </div>        
-     
-         </Form>
-     
-        <Container Fluid>
-        <img src={medTechLogo} alt="medTech Logo" />
-        </Container>
-     
+
+             <Header/>
+             <PatientLogin/>
+             <Footer/>    
       </>  
      );
 };
