@@ -8,8 +8,9 @@ import AppointmentForm from "./components/AppointmentForm/AppointmentForm";
 import AdminLogin from "./components/AdminLogin/AdminLogin";
 import AdminDash from './pages/AdminDash';
 import NewDoctorForm from './components/NewDoctorForm/NewDoctorForm';
-//import DoctorLogin from './components/DoctorLogin/DoctorLogin';
-
+// import DoctorLogin from './components/DoctorLogin/DoctorLogin';
+import Footer from './components/Footer/Footer';
+import NewAdminForm from "./components/NewAdminForm/NewAdminForm";
 
 
 function App() {
@@ -20,6 +21,8 @@ function App() {
       <AdminLogin />
       <AppointmentForm />
       <NewDoctorForm />
+      <Footer/>
+      <NewAdminForm/>
 
     </div>
     );

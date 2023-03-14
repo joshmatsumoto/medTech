@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 function Header() {
     return (
         <Container fluid>
-            <img src= "/medtechlogoonly.png" alt= "medTech Logo"/>
+            <img src= "../../assets/medTechLogoNoWhite.png" alt= "medTech Logo"/>
         </Container>
     );
 }

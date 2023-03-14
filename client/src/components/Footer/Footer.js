@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 function Footer() {
     return (
         <Container fluid>
-            <img src= "/medtechlogoNoWhite.png" alt= "medTech Logo"/>
+            <img src= "" alt= "medTech Logo"/>
         </Container>
     );
 }
