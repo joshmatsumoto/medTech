@@ -1,11 +1,13 @@
-import { Link } from 'react-router-dom';
 
-const Home = () => {
-    const { loading, data } = useQuery(GET_POSTS);
-    fet
-    const posts = data?.posts || [];
+import React from "react";
+import Footer from "../components/Footer/Footer";
+
+function Home() {
     return (
-        <div>
-            <h1 style="text-align :center">Welcome to Our Clinic</h1>
-            {loading? (
-                <div>Loading...</div>
+        <div className="Home">
+            <Footer />
+        </div>
+    )
+}
+
+export default Home;
