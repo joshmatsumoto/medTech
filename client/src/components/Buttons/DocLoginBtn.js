@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import DoctorLogin from "../DoctorLogin/DoctorLogin";
 import { Col, Row, Button, Modal } from "react-bootstrap";
 
-function docBtn() {
+function DocBtn() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -43,4 +43,4 @@ function docBtn() {
   );
 }
 
-export default docBtn;
+export default DocBtn;

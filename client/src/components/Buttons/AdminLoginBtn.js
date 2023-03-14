@@ -3,7 +3,7 @@ import AdminLogin from "../AdminLogin/AdminLogin";
 
 import { Col, Row, Button, Modal } from "react-bootstrap";
 
-function adminBtn() {
+function AdminBtn() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -43,4 +43,4 @@ function adminBtn() {
   );
 }
 
-export default adminBtn;
+export default AdminBtn;
