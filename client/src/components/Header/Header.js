@@ -1,9 +1,10 @@
 import Container from 'react-bootstrap/Container';
+import medTechLogo2 from '../../assets/medTechLogoNoWhite.png';
 
 function Header() {
     return (
         <Container fluid>
-            <img src= "/medtechlogoonly.png" alt= "medTech Logo"/>
+            <img src={medTechLogo2} alt="medTech Logo"/>
         </Container>
     );
 }

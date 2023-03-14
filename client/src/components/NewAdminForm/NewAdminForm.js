@@ -32,14 +32,7 @@ function newAdminForm() {
           </Col>
         </Row>
 
-        <Row className="mb-3">
-          <Col md={{ span: 6, offset: 3 }}>
-            <Form.Group className="mb-3" controlId="formGridAddress2">
-              <Form.Label>Address 2</Form.Label>
-              <Form.Control placeholder="Apartment, studio, or floor" />
-            </Form.Group>
-          </Col>
-        </Row>
+
 
         <Row className="mb-3">
           <Col md={{ span: 6, offset: 3 }}>
@@ -55,7 +48,7 @@ function newAdminForm() {
         <Row className="mb-3">
           <Col md={{ span: 6, offset: 3 }}>
             <Form.Group className="mb-3" controlId="formGridZip">
-              <Form.Label>Zip</Form.Label>
+              <Form.Label>Phone Number</Form.Label>
               <Form.Control />
             </Form.Group>
           </Col>
