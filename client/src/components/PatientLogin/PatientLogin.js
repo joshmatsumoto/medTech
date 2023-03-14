@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Form, Row ,Col , Button, Alert, Modal} from 'react-bootstrap';
 import PatientForm from '../NewPatientForm/NewPatientForm';
+import PatientBtn from '../Buttons/PatientLoginBtn'
 //import Auth from '../utils/auth';
 
 
@@ -79,12 +80,7 @@ const PatientLogin = () => {
           <Row>
           <Col className='mt-4 d-flex justify-content-center'md={{ span: 6, offset: 3 }}>
             <div className='gap-3 d-flex'>
-          <Button
-            disabled={!(patientFormData.email && patientFormData.password)}
-            type='submit'
-            variant='success'>
-            Create New Patient
-          </Button>
+          <PatientBtn/>
           <Button
             disabled={!(patientFormData.email && patientFormData.password)}
             type='submit'

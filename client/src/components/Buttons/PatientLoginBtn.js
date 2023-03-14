@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PatientForm from "../NewPatientForm/NewPatientForm";
 import { Col, Row, Button, Modal } from "react-bootstrap";
 
+
 function PatientBtn() {
   const [show, setShow] = useState(false);
 

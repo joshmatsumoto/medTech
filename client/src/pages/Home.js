@@ -11,7 +11,7 @@ import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import AdminBtn from '../components/Buttons/AdminLoginBtn';
 import  DocBtn from '../components/Buttons/DocLoginBtn';
-import PatientBtn from '../components/Buttons/PatientLoginBtn';
+
 
 const Home = () => {
 
@@ -22,9 +22,9 @@ const Home = () => {
              <PatientLogin/>
 
              <DocBtn/>
-             <PatientBtn/>
-             <AdminBtn/>
              
+             <AdminBtn/>
+
              <Footer/>
       </>
      );
