@@ -1,6 +1,6 @@
 //import { Link } from 'react-router-dom';
 //import React, { useState } from'react';
-//import Container from'react-bootstrap/Container';   
+//import Container from'react-bootstrap/Container';
 //import Button from'react-bootstrap/Button';
 import PatientLogin from '../components/PatientLogin/PatientLogin';
 //import medTechLogo from './medTechLogo.png';
@@ -19,14 +19,10 @@ const Home = () => {
              <Header/>
              <PatientLogin/>
              <Buttons/>
-             <Footer/>    
-      </>  
+             <Footer/>
+      </>
      );
 };
 
 
 export default Home;
-
-
-
-

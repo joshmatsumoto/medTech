@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Form, Row ,Col , Button, Alert, Modal} from 'react-bootstrap';
+import AdminLogin from "../AdminLogin/AdminLogin";
 //import Auth from '../utils/auth';
 
 
@@ -7,7 +8,7 @@ const PatientLogin = () => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  // const handleShow = () => setShow(true);
     const [patientFormData, setPatientFormData] = useState({ email: '', password: '' });
     const [validated] = useState(false);
     const [showAlert, setShowAlert] = useState(false);

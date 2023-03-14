@@ -12,7 +12,6 @@ function App() {
     <div className="App">
       <>
         <Router>
-          <Home />
           <Routes>
             <Route exact path="/" element={<Home />} />
           </Routes>
