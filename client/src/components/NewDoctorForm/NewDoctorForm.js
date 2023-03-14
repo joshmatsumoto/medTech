@@ -1,77 +1,69 @@
-import React from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import React from 'react';
 
-function DoctorForm() {
-  return (
-    <Container className="text-dark text-start">
-      <Form>
-        <Row className="mb-3">
-          <Col md={{ span: 6, offset: 3 }}>
-            <Form.Group className="mb-3" controlId="DoctorsName">
-              <Form.Label>Doctor Name</Form.Label>
-              <Form.Control placeholder="Enter Doctor name" />
-            </Form.Group>
-          </Col>
-        </Row>
+import {Container, Form, Row, Col, Button, } from 'react-bootstrap';
 
-        <Row className="mb-3">
-          <Col md={{ span: 6, offset: 3 }}>
-            <Form.Group className="mb-3" controlId="DoctorsEmail">
-              <Form.Label>Doctor Email</Form.Label>
-              <Form.Control type="email" placeholder="Enter Doctor email" />
-            </Form.Group>
-          </Col>
-        </Row>
 
-        <Row className="mb-3">
-          <Col md={{ span: 6, offset: 3 }}>
-            <Form.Group className="mb-3" controlId="doctorPassword">
-              <Form.Label>password</Form.Label>
-              <Form.Control type="password" placeholder="Enter password" />
-            </Form.Group>
-          </Col>
-        </Row>
 
-        <Row className="mb-3">
-          <Col md={{ span: 6, offset: 3 }}>
-            <Form.Group className="mb-3" controlId="Department">
-              <Form.Label>department</Form.Label>
-              <Form.Control type="email" placeholder="Enter department" />
-            </Form.Group>
-          </Col>
-        </Row>
 
-        <Row className="mb-3">
-          <Col md={{ span: 6, offset: 3 }}>
-            <Form.Group className="mb-3" controlId="officeHours">
-              <Form.Label>Office officeHours</Form.Label>
-              <Form.Control type="email" placeholder="Enter Office officeHours" />
-            </Form.Group>
-          </Col>
-        </Row>
+const DoctorForm = () => {
 
-        <Row className="mb-3">
-          <Col md={{ span: 6, offset: 3 }}>
-            <Form.Group className="mb-3" controlId="officeLoactation">
-              <Form.Label>Office Location</Form.Label>
-              <Form.Control type="email" placeholder="Enter Office Location" />
-            </Form.Group>
-          </Col>
-        </Row>
-        
-        
-        
 
-        <Row className="mb-3">
-          <Col md={{ span: 6, offset: 3 }}>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
-          </Col>
-        </Row>
-      </Form>
-    </Container>
-  );
+  return(
+  <Container className='text-dark text-start'>
+    <Form>
+      <Row>
+        <Col md={{ span: 6, offset: 3 }}>
+          <Form.Group className='mb-3' controlId='doctorsName'>
+            <Form.Label>Doctor's Name</Form.Label>
+            <Form.Control placeholder="Enter Doctor's name" />
+          </Form.Group>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col md={{ span: 6, offset: 3 }}>
+          <Form.Group className='mb-3' controlId='doctorsEmail'>
+            <Form.Label>Doctor's Email</Form.Label>
+            <Form.Control type="email" placeholder="Enter Doctor's email" />
+          </Form.Group>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col md={{ span: 6, offset: 3 }}>
+          <Form.Group className="mb-3" controlId="Department">
+            <Form.Label>Department </Form.Label>
+            <Form.Control placeholder="Department" />
+          </Form.Group>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col md={{ span: 6, offset: 3 }}>
+          <Form.Group className="mb-3" controlId="formGridAddress2">
+            <Form.Label>Office Hours</Form.Label>
+            <Form.Control placeholder="Office Hours" />
+          </Form.Group>
+        </Col>
+      </Row>
+
+      <Row className="mb-3">
+        <Col md={{ span: 6, offset: 3 }}>
+          <Form.Group className='mb-3' id='formGridCheckbox'>
+            <Form.Check type='checkbox' label='Check me out' />
+          </Form.Group>
+        </Col>
+      </Row>
+
+      <Row className="mb-3">
+        <Col md={{ span: 6, offset: 3 }}>
+          <Button variant='primary' type='submit'>
+            Submit
+          </Button>
+        </Col>
+      </Row>
+    </Form>
+  </Container>
+);
 }
-
 export default DoctorForm;

@@ -7,6 +7,10 @@ import Header from "./components/Header/Header";
 import AppointmentForm from "./components/AppointmentForm/AppointmentForm";
 import AdminLogin from "./components/AdminLogin/AdminLogin";
 import AdminDash from './pages/AdminDash';
+import NewDoctorForm from './components/NewDoctorForm/NewDoctorForm';
+//import DoctorLogin from './components/DoctorLogin/DoctorLogin';
+
+
 
 function App() {
   return (
@@ -15,6 +19,7 @@ function App() {
       <AdminDash />
       <AdminLogin />
       <AppointmentForm />
+      <NewDoctorForm />
 
     </div>
     );
