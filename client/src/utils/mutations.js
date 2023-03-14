@@ -17,6 +17,45 @@ mutation login($userType: String!, $email: String!, $password: String!) {
 }
 `;
 
+export const ASSIGN_DOCTOR = gql`
+  mutation assignDoctor(
+    $doctor: ID!)
+    { assignDoctor(doctor: $doctor)
+      {
+        doctor{
+          _id
+          name
+          email
+          password
+          department
+          doctorScore
+          officeHours
+          officeLocation
+        }
+      } 
+    }
+`;
+
+export const ASSIGN_PATIENT = gql`
+  mutation assignPatient(
+    $patients: [ID]!)
+    { assignPatient(patients: $patients)
+      {
+        patients{
+          _id
+          name
+          age
+          gender
+          address
+          phone
+          email
+          password
+        }
+      } 
+    }
+`;
+
+
 export const ADD_PATIENT = gql`
 mutation addPatient(
 $name: String!,
@@ -38,6 +77,52 @@ $password: String!,
   ) {
     token
     patient{
+      _id
+    }
+  }
+}
+`;
+
+export const ADD_DOCTOR = gql`
+mutation addDoctor(
+$name: String!,
+$email: String!,
+$password: String!,
+$department: String!,
+$officeHours: String!,
+$officeLocation: String!,
+) {
+  addDoctor(
+    name: $name
+    email: $email
+    password: $password
+    department: $department
+    officeHours: $officeHours
+    officeLocation: $officeLocation
+  ) {
+    token
+    doctor{
+      _id
+    }
+  }
+}
+`;
+
+export const ADD_ADMIN = gql`
+mutation addAdmin(
+$name: String!,
+$email: String!,
+$password: String!,
+$phoneNumber: String!,
+) {
+  addAdmin(
+    name: $name
+    email: $email
+    password: $password
+    phoneNumber: $phoneNumber
+  ) {
+    token
+    administrator{
       _id
     }
   }
