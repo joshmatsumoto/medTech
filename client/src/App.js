@@ -7,10 +7,6 @@ import "./styles/custom.min.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 
-<<<<<<< HEAD
-
-=======
->>>>>>> d90348714efc83d7488db83262ae357e87874058
 function App() {
   return (
     <div className="App">
