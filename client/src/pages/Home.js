@@ -11,7 +11,8 @@ import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import AdminBtn from '../components/Buttons/AdminLoginBtn';
 import  DocBtn from '../components/Buttons/DocLoginBtn';
-import SafetyTips from '../components/SafetyTips/SafetyTips';
+import PatientNavBar from "../components/Navigation/PatientNavigation";
+import AdminNavBar from "../components/Navigation/AdminNavigation";
 
 
 const Home = () => {
@@ -30,8 +31,10 @@ const Home = () => {
              
              <AdminBtn/>
              </div>
-           
-             <Footer/>     
+             <AdminNavBar/>
+             <PatientNavBar/>
+
+             <Footer/>
       </>
      );
 };
