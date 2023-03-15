@@ -50,7 +50,7 @@ const PatientLogin = () => {
     }
   };
   return (
-    <Container className="text-dark text-start mt-5">
+    <Container className="text-dark text-start mt-5 pt-5">
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
         <Alert
           dismissible
