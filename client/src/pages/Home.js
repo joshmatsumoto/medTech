@@ -1,5 +1,5 @@
 //import { Link } from 'react-router-dom';
-//import React, { useState } from'react';
+import React from'react';
 //import Container from'react-bootstrap/Container';
 //import Button from'react-bootstrap/Button';
 import PatientLogin from '../components/PatientLogin/PatientLogin';
@@ -11,14 +11,19 @@ import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import AdminBtn from '../components/Buttons/AdminLoginBtn';
 import  DocBtn from '../components/Buttons/DocLoginBtn';
+import PatientNavBar from "../components/Navigation/PatientNavigation";
+import AdminNavBar from "../components/Navigation/AdminNavigation";
 
 
 const Home = () => {
 
     return (
         <>
-
              <Header/>
+             <div>
+            <SafetyTips/>
+
+             </div>
              <PatientLogin/>
 
              <div className='d-flex justify-content-center gap-3'>
@@ -26,6 +31,8 @@ const Home = () => {
              
              <AdminBtn/>
              </div>
+             <AdminNavBar/>
+             <PatientNavBar/>
 
              <Footer/>
       </>
