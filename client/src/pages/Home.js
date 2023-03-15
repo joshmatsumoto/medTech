@@ -1,5 +1,5 @@
 //import { Link } from 'react-router-dom';
-//import React, { useState } from'react';
+import React from'react';
 //import Container from'react-bootstrap/Container';
 //import Button from'react-bootstrap/Button';
 import PatientLogin from '../components/PatientLogin/PatientLogin';
@@ -19,8 +19,11 @@ const Home = () => {
 
     return (
         <>
-
              <Header/>
+             <div>
+            <SafetyTips/>
+
+             </div>
              <PatientLogin/>
 
              <div className='d-flex justify-content-center gap-3'>
