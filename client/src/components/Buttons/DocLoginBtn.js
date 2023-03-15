@@ -13,22 +13,17 @@ function DocBtn() {
     <>
       <div>
         <Row>
-          <Col
-            className="my-5 d-flex justify-content-between"
-            md={{ span: 6, offset: 3 }}
-          >
-
-            <Button variant="primary" onClick={handleShow}>
-              DoctorLogin
+          <Col>
+            <Button className="px-3" variant="primary" onClick={handleShow}>
+              Doctor Login
             </Button>
           </Col>
         </Row>
       </div>
 
-
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>DoctorLogin</Modal.Title>
+          <Modal.Title>Doctor Login</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <DoctorLogin />

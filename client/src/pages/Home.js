@@ -21,9 +21,11 @@ const Home = () => {
              <Header/>
              <PatientLogin/>
 
+             <div className='d-flex justify-content-center gap-3'>
              <DocBtn/>
              
              <AdminBtn/>
+             </div>
 
              <Footer/>
       </>
