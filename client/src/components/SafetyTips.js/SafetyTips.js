@@ -1,56 +1,22 @@
-import React from 'react';
-import { Card, Row, Col } from 'react-bootstrap';
- 
-const SafetyTips = () => {
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+function SafetyTips() {
   return (
-    <Row>
-      <Col>
-        <Card>
-          <Card.Body>Card 1</Card.Body>
-        </Card>
-      </Col>
+    <Container>
+      <Row>
+        <Col>1 of 3</Col>
+        <Col>2 of 3</Col>
+        <Col>3 of 3</Col>
+      </Row>
+      <Row>
+        <Col>1 of 3</Col>
+        <Col>2 of 3</Col>
+        <Col>3 of 3</Col>
+      </Row>
+    </Container>
+  );
+}
 
-      <Col>
-        <Card>
-          <Card.Body>Card 2</Card.Body>
-        </Card>  
-      </Col>
-
-      <Col>  
-        <Card>  
-          <Card.Body>Card 3</Card.Body>  
-        </Card>  
-      </Col >
-
-      <Col >  
-        < Card >  
-          < Card.Body > Card 4</ Card.Body >  
-        </ Card >  
-
-      </ Col >
-
-      < Col >  
-
-        < Card >  
-
-          < Card.Body > Card 5</ Card.Body >  
-
-        </ Card >  
-
-      </ Col > 
-
-      < Col > 
-
-        < Card > 
-
-          < Card.Body > Card 6</ Card.Body > 
-
-        </ Card > 
-
-      </ Col > 
-
-    </ Row >  
-    );  
-}; 
-export default SafetyTips;;
-
+export default SafetyTips;

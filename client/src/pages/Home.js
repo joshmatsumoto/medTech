@@ -10,7 +10,7 @@ import PatientLogin from '../components/PatientLogin/PatientLogin';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import Buttons from '../components/Buttons/Buttons';
-import SafetyTips from '../components/SafetyTips/Tips';
+// import SafetyTips from '../components/SafetyTips/SafetyTips';
 
 const Home = () => {
 
@@ -20,7 +20,7 @@ const Home = () => {
              <Header/>
              <PatientLogin/>
              <Buttons/>
-             <SafetyTips/>
+             {/* <SafetyTips/> */}
              <Footer/>    
       </>  
      );
