@@ -1,6 +1,6 @@
 //import { Link } from 'react-router-dom';
 //import React, { useState } from'react';
-//import Container from'react-bootstrap/Container';   
+//import Container from'react-bootstrap/Container';
 //import Button from'react-bootstrap/Button';
 import PatientLogin from '../components/PatientLogin/PatientLogin';
 //import medTechLogo from './medTechLogo.png';
@@ -9,8 +9,9 @@ import PatientLogin from '../components/PatientLogin/PatientLogin';
 //import { useForm } from'react-hook-form';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
-import Buttons from '../components/Buttons/Buttons';
-// import SafetyTips from '../components/SafetyTips/SafetyTips';
+import AdminBtn from '../components/Buttons/AdminLoginBtn';
+import  DocBtn from '../components/Buttons/DocLoginBtn';
+
 
 const Home = () => {
 
@@ -19,16 +20,17 @@ const Home = () => {
 
              <Header/>
              <PatientLogin/>
-             <Buttons/>
-             {/* <SafetyTips/> */}
-             <Footer/>    
-      </>  
+
+             <div className='d-flex justify-content-center gap-3'>
+             <DocBtn/>
+             
+             <AdminBtn/>
+             </div>
+
+             <Footer/>
+      </>
      );
 };
 
 
 export default Home;
-
-
-
-
