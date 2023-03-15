@@ -5,7 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import NewAdminForm from '../components/NewAdminForm/NewAdminForm';
 
-function AdminNavBar() {
+function AdminNavBar(props) {
   const [showAdminForm, setShowAdminForm] = useState(false);
 
   const handleAddAdminClick = () => {

@@ -6,7 +6,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
 import AppointmentForm from "../AppointmentForm/AppointmentForm";
 
-function PatientNavBar() {
+function PatientNavBar(props) {
   const [showForm, setShowForm] = useState(false);
   const handleShowForm = () => setShowForm(true);
   return (
