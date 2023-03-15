@@ -4,19 +4,24 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from'react-router-dom';
-import NewDoctorForm from '../NewDoctorForm';
-import NewPatientForm from '../NewPatientForm';
+import AppointmentForm from '../AppointmentForm/AppointmentForm';
+import NewPatientForm from '../NewPatientForm/NewPatientForm';
 
 function DoctorNavBar() {
-    const [showForm, setShowForm] = useState(false);
+    const [showAppointmentsForm, setShowAppointmentsForm, showPatientsForm, setShowPatientsForm] = useState(false);
 
-    const handleShowDocNav = () => {
-        setShowDocNav(true);
+    const handleShowAppointmentsForm = () => {
+        setShowAppointmentsForm(true);
+    }
+
+    const handleShowPatientsForm = () => {
+        setShowPatientsForm(true);
+
 };
 
 return (
     <div>
-        <Navbar bg="tertiary" variant="dark">
+        <Navbar bg="primary" variant="dark">
             <Container fluid>
                 <Navbar.Brand className='justify-content-between'>
                     MedTech
@@ -25,28 +30,44 @@ return (
                     <Nav.Link as={Link} to="/">
                         Home
                     </Nav.Link>
-                    <Nav.NavDropdown title="Appointments" id="appointment-dropdown">
-                        <NavDropdown.Item>
+                    <NavDropdown title="Appointments" id="appointment-dropdown">
+                        <NavDropdown.Item onClick={handleShowAppointmentsForm}>
                             Create New Appointment
                         </NavDropdown.Item>
                         <NavDropdown.Item>
                             View All Appointments
                         </NavDropdown.Item>
-                    <Nav.NavDropdown title="Patients" id="patients-dropdown">
-                        <NavDropdown.Item>
+                    </NavDropdown>
+                    <NavDropdown title="Patients" id="patients-dropdown">
+                        <NavDropdown.Item onClick={handleShowPatientsForm}>
                             Create New Patient
                         </NavDropdown.Item>
                         <NavDropdown.Item>
                             View All Patients
                         </NavDropdown.Item>
-                    </Nav.NavDropdown>
-                    </Nav.NavDropdown>
-
+                    </NavDropdown>
+                    <Nav.Link as={Link} to="/">
+                        Sign out
+                    </Nav.Link>
                 </Nav>
             </Container>
         </Navbar>
+        {showAppointmentsForm && (
+            <div className='mt-5'>
+                <AppointmentForm />
+            </div>    
+
+        )}
+
+        {showPatientsForm && (
+            <div className='mt-5'>
+                <NewPatientForm />
+            </div>
+        )}
     </div>
 
 );
+
+}
 
 export default DoctorNavBar;
