@@ -1,7 +1,7 @@
-import { gql } from '@appollo/client';
+import { gql } from '@apollo/client';
 
 export const LOGIN = gql`
-mutation login($userType: String!, $email: String!, $password: String!) {
+mutation login ($userType: String!, $email: String!, $password: String!) {
   login(userType: $userType, email: $email, password: $password) {
     token
     patient{
@@ -139,6 +139,13 @@ $reason: String,
   dateTime:$dateTime
   reason: $reason
   )
+  }
+  {
+  appointment{
+    _id
+    dateTime
+    reason
+  }
   }
 `;
 

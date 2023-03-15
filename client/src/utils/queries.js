@@ -87,10 +87,21 @@ export const QUERY_PATIENTS = gql`
     }
 `;
 
-export const QUERY_ADMINISTRATORS = gql`
+export const QUERY_ADMINISTRATOR = gql`
      {
         administrators {
             userType
+            _id
+            name
+            email
+            password
+            phoneNumber
+        }
+    }
+`;
+export const QUERY_ADMINISTRATORS = gql`
+    {
+        administrators {
             _id
             name
             email
