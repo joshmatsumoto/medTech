@@ -13,12 +13,9 @@ function AdminBtn() {
     <>
       <div>
         <Row>
-          <Col
-            className="my-5 d-flex justify-content-between"
-            md={{ span: 6, offset: 3 }}
-          >
-            <Button variant="primary" onClick={handleShow}>
-              AdminLogin
+          <Col>
+            <Button className="px-3" variant="primary" onClick={handleShow}>
+              Admin Login
             </Button>
           </Col>
         </Row>

@@ -9,18 +9,30 @@ function PatientBtn() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const [patientFormData, setPatientFormData] = useState({
+    email: "",
+    password: "",
+  });
+  
+
   return (
     <>
       <div>
         <Row>
           <Col
-            className="my-5 d-flex justify-content-between"
-            md={{ span: 6, offset: 3 }}
+            className="my-5 d-flex gap-3 justify-content-between"
           >
 
-            <Button variant="primary" onClick={handleShow}>
+            <Button variant="outline-success" onClick={handleShow} className="px-2">
               Create New Patient
             </Button>
+            <Button
+                disabled={!(patientFormData.email && patientFormData.password)}
+                type="submit"
+                variant="success"
+              >
+                Submit
+              </Button>
           </Col>
         </Row>
       </div>
