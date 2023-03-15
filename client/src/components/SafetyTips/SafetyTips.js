@@ -2,7 +2,7 @@ import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import Image from 'react-bootstrap/Image'
 import medTechLogo2 from '../../assets/medTechLogoNoWhite.png';
-import { Link } from'react-router-dom';
+
 function SafetyTips() {
   return (
     <Carousel variant="dark">
