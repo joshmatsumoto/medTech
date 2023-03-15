@@ -1,10 +1,14 @@
 // see SignupForm.js for comments
 import React, { useState } from 'react';
 import { Container, Form, Row ,Col , Button, Alert } from 'react-bootstrap';
+import { useMutation } from '@apollo/client';
+import { LOGIN } from '../../utils/mutations'
+import Auth from '../../utils/auth';
 //import Auth from '../utils/auth';
 
 
-const DoctorLogin = () => {
+const DoctorLogin = (props) => {
+  const [DoctorLogin, { error }] = useMutation(LOGIN);
   const [doctorFormData, setDoctorFormData] = useState({ email: '', password: '' });
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
@@ -25,7 +29,16 @@ const DoctorLogin = () => {
     }
 
     try {
-      const response =  DoctorLogin();
+      const response =  DoctorLogin(
+        {
+          variables: {
+            email: doctorFormData.email,
+            password: doctorFormData.password
+          },
+        }
+      );
+      const token = response.data.login.token;
+      Auth.login(token);
       if (!response.ok) {
         throw new Error('something went wrong!');
       }

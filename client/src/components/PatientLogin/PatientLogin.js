@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { useMutation } from '@apollo/client';
+import { LOGIN } from '../../utils/mutations'
+import Auth from '../../utils/auth';
 import {
   Container,
   Form,
@@ -13,6 +16,7 @@ import PatientBtn from "../Buttons/PatientLoginBtn";
 //import Auth from '../utils/auth';
 
 const PatientLogin = () => {
+  const [PatientLogin, { error }] = useMutation(LOGIN);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -36,7 +40,14 @@ const PatientLogin = () => {
       event.stopPropagation();
     }
     try {
-      const response = PatientLogin();
+      const response = PatientLogin( {
+        variables: {
+          email: patientFormData.email,
+          password: patientFormData.password
+        },
+      });
+      const token = response.data.login.token;
+      Auth.login(token);
       if (!response.ok) {
         throw new Error("something went wrong!");
       }
