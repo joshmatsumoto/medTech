@@ -1,10 +1,11 @@
 import PatientNavBar from "../components/Navigation/PatientNavigation";
 import AdminNavBar from "../components/Navigation/AdminNavigation";
 import DoctorNavBar from "../components/Navigation/DoctorNavigation";
+import {loggedIn}  from "../utils/auth";
 
 
 function DashboardNavs(props) {
-  const loggedIn = props.loggedIn;
+   loggedIn = props.loggedIn;
 
   if ( this.props.userType === "ADMINISTRATOR" ) {
     return <AdminNavBar />;

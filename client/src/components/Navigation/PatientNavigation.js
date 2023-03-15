@@ -11,21 +11,31 @@ function PatientNavBar(props) {
   const handleShowForm = () => setShowForm(true);
   return (
     <div>
-      <Navbar className="justify-content-end" bg="dark" variant="dark">
+      <Navbar bg="dark" variant="dark">
         <Container fluid>
-          <Nav>
-            <Nav.Link as={Link} to="/dashboard">
-              Home
-            </Nav.Link>
-            <NavDropdown title="createAppointment">
+        <Navbar.Brand className="justify-content-between">
+          MedTech
+        </Navbar.Brand>
+          <Nav className="justify-content-end">
+            <NavDropdown title="Appointments">
               <NavDropdown.Item
                 as={Link}
-                to="/createAppointment"
+                to="/"
                 onClick={handleShowForm}
               >
                 Create New Appointment
               </NavDropdown.Item>
+              <NavDropdown.Item
+                as={Link}
+                to="/"
+                onClick={handleShowForm}
+              >
+                View All Appointments
+              </NavDropdown.Item>
             </NavDropdown>
+            <Nav.Link as={Link} to="/dashboard">
+              Home
+            </Nav.Link>
           </Nav>
         </Container>
       </Navbar>
