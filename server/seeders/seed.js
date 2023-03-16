@@ -2,6 +2,18 @@ const connection = require('../config/connection');
 const { Doctor, Patient, Hospital, Administrator } = require('../models');
 const { faker } = require('@faker-js/faker');
 const dayjs = require('dayjs');
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGODB_URL);
+    console.log('Connected to mongodb');
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+connectDB();
 
 connection.on('error', (err) => console.log(err));
 
@@ -9,6 +21,9 @@ connection.once('open', async () => {
   console.log('You are successfully connected to the MedTech DB!');
 
   await Doctor.deleteMany({});
+  await Patient.deleteMany({});
+  await Hospital.deleteMany({});
+  await Administrator.deleteMany({});
 
   const doctors = [];
 
@@ -21,10 +36,11 @@ connection.once('open', async () => {
       officeHours: '9:00 AM - 5:00 PM',
       officeLocation: `Office Number ${faker.datatype.number({ min: 1001, max: 5050})}`,
       email: faker.internet.email(),
+      password: faker.internet.password(8),
     });
   }
 
-  await Patient.deleteMany({});
+
 
   const patients = [];
 
@@ -41,20 +57,22 @@ connection.once('open', async () => {
       address: faker.address.streetAddress(true),
       phone: faker.phone.number('555-###-####'),
       email: faker.internet.email(),
+      password: "abc12334",
     })
   }
 
-  await Hospital.deleteMany({});
+  
   const hospitals = [];
   for (let i = 0; i < 1; i++) {
     hospitals.push({
       name: faker.company.name(),
       address: faker.address.streetAddress(true),
       phone: faker.phone.number('555-###-####'),
+      password: faker.internet.password(8),
     })
   }
 
-  await Administrator.deleteMany({});
+
 
   const admins = [];
   for (let i = 0; i < 1; i++) {
@@ -62,14 +80,24 @@ connection.once('open', async () => {
       userType: 'admin',
       name: faker.name.fullName({firstName: 'John', lastName: 'Doe',}),
       email: faker.internet.email('John', 'Doe'),
-      phoneNumber: '555-555-555'
-
+      phoneNumber: '555-555-555',
+      password: faker.internet.password(8),
     })
   }
+  const patientData = await Patient.insertMany(patients);
+  const usersWithHashedPasswordsPromiseArray = patientData.map(
+    async (patients) => {
+      let hashedPassword = await bcrypt.hash(patients.password, saltRounds);
+      patients.password = hashedPassword;
+      return patients;
+  })
+  const usersWithHashedPasswords = await Promise.all(usersWithHashedPasswordsPromiseArray)
+
+  const patientsHashed = await Patients.insertMany(usersWithHashedPasswords)
+
 
   await Doctor.collection.insertMany(doctors);
 
-  await Patient.collection.insertMany(patients);
 
   await Hospital.collection.insertMany(hospitals);
 

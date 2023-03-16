@@ -54,8 +54,8 @@ const AdminLogin = (props) => {
         </Alert>
         <Row>
           <Col md={{ span: 6, offset: 3 }}>
-            <Form.Group className="mb-3" controlId="adminLogin">
-              <Form.Label htmlFor='email'> Administrator Email</Form.Label>
+            <Form.Group className="mb-3" controlId="adminEmail">
+              <Form.Label> Administrator Email</Form.Label>
               <Form.Control
                 type='text'
                 placeholder='Your email'
@@ -70,8 +70,8 @@ const AdminLogin = (props) => {
         </Row>
         <Row>
           <Col md={{ span: 6, offset: 3 }}>
-            <Form.Group>
-              <Form.Label htmlFor='password'> Administrator Password</Form.Label>
+            <Form.Group controlId='adminPassword'>
+              <Form.Label > Administrator Password</Form.Label>
               <Form.Control
                 type='password'
                 placeholder='Your password'

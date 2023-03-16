@@ -27,7 +27,6 @@ function PatientBtn() {
               Create New Patient
             </Button>
             <Button
-                disabled={!(patientFormData.email && patientFormData.password)}
                 type="submit"
                 variant="success"
               >

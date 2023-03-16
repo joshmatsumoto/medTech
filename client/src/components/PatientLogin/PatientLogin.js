@@ -74,7 +74,7 @@ const PatientLogin = () => {
         <Row>
           <Col md={{ span: 6, offset: 3 }}>
             <Form.Group className="mb-3" controlId="patientLogin">
-              <Form.Label htmlFor="email"> Patient Email</Form.Label>
+              <Form.Label controlId="email"> Patient Email</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Your email"
@@ -92,7 +92,7 @@ const PatientLogin = () => {
         <Row>
           <Col md={{ span: 6, offset: 3 }}>
             <Form.Group>
-              <Form.Label htmlFor="password"> Patient Password</Form.Label>
+              <Form.Label controlId="password"> Patient Password</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="Your password"

@@ -65,7 +65,7 @@ const DoctorLogin = (props) => {
         <Row>
         <Col md={{ span: 6, offset: 3 }}>
         <Form.Group className= "mb-3" controlId= "doctorsName">
-          <Form.Label htmlFor='email'>Email</Form.Label>
+          <Form.Label>Email</Form.Label>
           <Form.Control
             type='text'
             placeholder='Your email'
@@ -82,8 +82,8 @@ const DoctorLogin = (props) => {
 
         <Row>
         <Col md={{ span: 6, offset: 3 }}>
-        <Form.Group>
-          <Form.Label htmlFor='password'>Password</Form.Label>
+        <Form.Group controlId='password'>
+          <Form.Label >Password</Form.Label>
           <Form.Control
             type='password'
             placeholder='Your password'
