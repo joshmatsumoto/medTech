@@ -1,10 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
 function PatientForm() {
+  const [patientData, setPatientData] = useState({
+    address: "",
+    city: "",
+    state: "",
+    zip: "",
+  });
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setPatientData({
+      ...patientData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const { address, city, state, zip } = patientData;
+    const concatenatedAddress = `${address}, ${city}, ${state} ${zip}`;
+    console.log(concatenatedAddress);
+  };
+
   return (
     <Container className="text-dark text-start">
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Row className="mb-3">
           <Col md={{ span: 6, offset: 3 }}>
             <Form.Group className="mb-3" controlId="patientsName">
@@ -27,18 +49,23 @@ function PatientForm() {
           <Col md={{ span: 6, offset: 3 }}>
             <Form.Group className="mb-3" controlId="formGridAddress1">
               <Form.Label>Address</Form.Label>
-              <Form.Control placeholder="1234 Main St" />
+              <Form.Control
+                name="address"
+                placeholder="1234 Main St"
+                onChange={handleInputChange}
+              />
             </Form.Group>
           </Col>
         </Row>
-
-
 
         <Row className="mb-3">
           <Col md={{ span: 6, offset: 3 }}>
             <Form.Group className="mb-3" controlId="formGridCity">
               <Form.Label>City</Form.Label>
-              <Form.Control />
+              <Form.Control
+                name="city"
+                onChange={handleInputChange}
+              />
             </Form.Group>
           </Col>
         </Row>
@@ -47,7 +74,11 @@ function PatientForm() {
           <Col md={{ span: 6, offset: 3 }}>
             <Form.Group className="mb-3" controlId="formGridState">
               <Form.Label>State</Form.Label>
-              <Form.Select defaultValue="Choose...">
+              <Form.Select
+                name="state"
+                defaultValue="Choose..."
+                onChange={handleInputChange}
+              >
                 <option value="AL">AL</option>
                 <option value="AK">AK</option>
                 <option value="AZ">AZ</option>
