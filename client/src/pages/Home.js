@@ -15,6 +15,7 @@ import PatientNavBar from "../components/Navigation/PatientNavigation";
 import AdminNavBar from "../components/Navigation/AdminNavigation";
 import SafetyTips from '../components/SafetyTips/SafetyTips';
 
+
 const Home = () => {
 
     return (
@@ -32,6 +33,7 @@ const Home = () => {
              <AdminBtn/>
              </div>
              <AdminNavBar/>
+             <DoctorNavBar/>
              <PatientNavBar/>
 
              <Footer/>
