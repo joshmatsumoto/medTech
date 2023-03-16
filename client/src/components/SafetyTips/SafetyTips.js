@@ -10,7 +10,7 @@ function SafetyTips() {
   return (
     <Carousel variant="dark">
       <Carousel.Item interval={1000}>
-        <div> < Image as={Link} to="https://www.techsafety.org/technology-safety-quick-tips" alt="1x2"
+        <div> < Image as={Link} to= 'https://www.techsafety.org/technology-safety-quick-tips' alt="1x2"
           className="d-block w-100"
           src={safetynet}/>
           </div>
@@ -19,7 +19,7 @@ function SafetyTips() {
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item interval={1000}>
-      <div> <Image as={Link} to="https://giving.aidslifecycle.org/participant/2549"  alt="1x2"
+      <div> <Image as={Link} to= 'https://giving.aidslifecycle.org/participant/2549' alt="1x2"
           className="d-block w-100"
           src={Edwin}
         /> </div>
@@ -28,7 +28,7 @@ function SafetyTips() {
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
-      <div> <Image as={Link} to="https://giving.aidslifecycle.org/participant/2549" alt="1x2"
+      <div> <Image as={Link} to= 'https://giving.aidslifecycle.org/participant/2549' alt="1x2"
           className="d-block w-100"
           src={group}
         /> </div>
