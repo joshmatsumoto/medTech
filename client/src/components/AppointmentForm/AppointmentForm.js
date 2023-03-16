@@ -4,6 +4,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import DatePicker from "react-datepicker";
+import { Link } from 'react-router-dom';
 import { setHours, setMinutes } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 import Button from "react-bootstrap/Button";
@@ -107,9 +108,13 @@ function AppointmentForm(props) {
                   <Button variant="outline-danger" type="reset">
                     Reset
                   </Button>
-                  <Button variant="success" type="submit">
-                    Submit
-                  </Button>
+                  <Link
+              className="btn"
+              role="button"
+              to="/patdashboard"
+            >
+              submit
+            </Link>
                 </div>
               </Col>
             </Row>
