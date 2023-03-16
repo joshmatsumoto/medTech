@@ -14,7 +14,6 @@ import  DocBtn from '../components/Buttons/DocLoginBtn';
 import SafetyTips from '../components/SafetyTips/SafetyTips';
 
 
-
 const Home = () => {
 
     return (
