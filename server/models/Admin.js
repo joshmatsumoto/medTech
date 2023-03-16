@@ -1,6 +1,11 @@
 const { Schema, model } = require("mongoose");
+const bcrypt = require('bcrypt');
 
 const administratorSchema = new Schema({
+  userType: {
+    type: String,
+    default: 'administrator'
+  },
   name: {
     type: String,
     required: true,
@@ -20,6 +25,16 @@ const administratorSchema = new Schema({
     },
   },
 
+  password: {
+    type: String,
+    required: true,
+    minlength: 8,
+    validator: function (v) {
+      return /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(v);
+    },
+    message: (props) => `${props.value} is not a valid password.`,
+  },
+
   phoneNumber: {
     type: String,
     required: true,
@@ -31,27 +46,29 @@ const administratorSchema = new Schema({
     },
   },
 
-  doctors: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Doctor",
+},
+  {
+    toJSON: {
+      virtuals: true,
+      getters: true,
     },
-  ],
+    id: false,
+  }
 
-  patients: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Patient",
-    },
-  ],
+);
 
-  hospital: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Hospital",
-    },
-  ],
+administratorSchema.pre('save', async function (next) {
+  if (this.isNew || this.isModified('password')) {
+    const saltRounds = 10;
+    this.password = await bcrypt.hash(this.password, saltRounds);
+  }
+
+  next();
 });
+
+administratorSchema.methods.isCorrectPassword = async function (password) {
+  return bcrypt.compare(password, this.password);
+};
 
 const Administrator = model("Administrator", administratorSchema);
 

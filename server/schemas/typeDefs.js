@@ -1,42 +1,115 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+
   type Hospital {
-    _id: ID
+    _id: ID!
     name: String
     location: String
-    patientCount: Int
+    phoneNumber: String
+    doctors:[Doctor]
     patients: [Patient]
   }
 
   type Patient {
-    _id: ID
+    _id: ID!
+    userType: String
     name: String
-    department: String
-    creditHours: Int
+    age: Int
+    gender: String
+    address: String
+    phone: String
+    email: String
+    password: String
+    appointments: [Appointment]
     doctor: Doctor
   }
 
   type Doctor {
-    _id: ID
+    _id: ID!
+    userType: String
     name: String
+    email: String
+    password: String
+    department: String
     officeHours: String
     officeLocation: String
     doctorScore: Float
     patients: [Patient]
+    hospital: Hospital
+  }
+
+  type Administrator {
+  _id: ID!
+  userType: String
+  name: String
+  email: String
+  password: String
+  phone: String
+  }
+
+  type Appointment{
+  _id: ID!
+  dateTime: String
+  reason: String
   }
 
   type Query {
     hospitals: [Hospital]
+    hospital(_id: ID!): Hospital
     patients: [Patient]
+    patient(_id: ID!): Patient
+    thisPatient: Patient
     doctors: [Doctor]
-    patient(id: ID!): Patient
+    doctor(_id: ID!): Doctor
+    thisDoctor: Doctor
+    administrators: [Administrator]
+    thisAdministrator: Administrator
+    administrator(_id:ID!): Administrator
+
+  }
+  type Auth {
+    token: ID
+    Administrator:Administrator
+  }
+  type Auth {
+    token: ID
+    Patient:Patient
+  }
+  type Auth {
+    token: ID
+    Doctor:Doctor
   }
 
-  # Define which mutations the client is allowed to make
+  
   type Mutation {
-    # Set the required fields for new schools
-    addHospital(name: String!, location: String!, patientCount: Int!): Hospital
+    login(userType: String!, email: String!, password: String!): Auth
+    
+    assignDoctor(patient:ID!): Patient
+
+    assignPatient(doctor:ID!): Doctor
+
+    createDoctor(userType: String!, name: String!, email:String!, password:String!, department: String!, officeHours: String!, officeLocation: String!): Auth
+
+    createPatient(userType: String!, name: String!, age: Int!, gender: String!, address: String!, phone: String!, email: String!, password: String!,): Auth
+
+    createAdmin(userType: String!, name: String!, email: String!,password: String!, phoneNumber:String!): Auth
+
+    createAppointment(_id: ID!, dateTime: String!, reason: String!): Appointment
+
+    updateDoctor(_id: ID!, name: String, email:String, password:String, department: String, officeHours: String, officeLocation: String): Doctor
+
+    updatePatient(_id: ID!, name: String, age: Int, gender: String, address: String, phone: String, email: String, password: String,): Patient
+
+    updateAdmin( _id: ID!, name: String, email: String,password: String, phoneNumber:String): Administrator
+
+    deleteDoctor(_id: ID!): Doctor
+
+    deletePatient(_id: ID!): Patient
+
+    deleteAdmin(_id: ID!): Administrator
+
+
   }
 `;
 
