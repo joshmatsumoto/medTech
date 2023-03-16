@@ -18,10 +18,7 @@ function PatientNavBar(props) {
         </Navbar.Brand>
           <Nav className="justify-content-end">
             <NavDropdown title="Appointments">
-              <NavDropdown.Item
-                as={Link}
-                to="/"
-                onClick={handleShowForm}
+              <NavDropdown.Item as={Link} to='/patdashboard/appform'
               >
                 Create New Appointment
               </NavDropdown.Item>

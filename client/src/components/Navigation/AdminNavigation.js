@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
+import {Link} from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -26,7 +27,7 @@ function AdminNavBar(props) {
                 <NavDropdown.Item href="#view-all-admins">
                   View All Administrators
                 </NavDropdown.Item>
-                <NavDropdown.Item onClick={handleAddAdminClick}>
+                <NavDropdown.Item as={Link}to='/admindashboard/adminForm'>
                   Add Administrator
                 </NavDropdown.Item>
               </NavDropdown>
@@ -34,13 +35,13 @@ function AdminNavBar(props) {
                 <NavDropdown.Item href="#view-all-docs">
                   View All Doctors
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#add-doc">Add Doctor</NavDropdown.Item>
+                <NavDropdown.Item  as={Link}to='/admindashboard/docForm'>Add Doctor</NavDropdown.Item>
               </NavDropdown>
               <NavDropdown title="Patients" id="pat-dropdown">
-                <NavDropdown.Item href="#view-all-pats">
+                <NavDropdown.Item as={Link}to='/patientform'>
                   View All Patients
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#add-pat">Add Patient</NavDropdown.Item>
+                <NavDropdown.Item as={Link}to='/admindashboard/patientForm'>Add Patient</NavDropdown.Item>
               </NavDropdown>
               <Nav.Link href="#sign-out">Sign-Out</Nav.Link>
             </Nav>

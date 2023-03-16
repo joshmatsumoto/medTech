@@ -6,8 +6,12 @@ import "./styles/custom.min.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import DocDashboardNavs from "./pages/DocDash";
-import PatDashboardNavs from "./pages/PatDash";
+import PatDashboardNavs from "./pages/PatDash"
+import NewAdminForm from "./components/NewAdminForm/NewAdminForm";
 import AdminDashboardNavs from "./pages/AdminDash";
+import PatientForm from "./components/NewPatientForm/NewPatientForm";
+import DoctorForm from "./components/NewDoctorForm/NewDoctorForm";
+import AppointmentForm from "./components/AppointmentForm/AppointmentForm";
 import {
   ApolloClient,
   InMemoryCache,
@@ -45,8 +49,14 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/docdashboard" element={<DocDashboardNavs />} />
+            <Route exact path="/docdashboard/appform" element={<AppointmentForm />} />
+            <Route exact path="/docdashboard/patform" element={<PatientForm />} />
             <Route exact path="/patdashboard" element={<PatDashboardNavs />} />
-            <Route exact path="/admindashboard" element={<AdminDashboardNavs />} />
+            <Route exact path="/patdashboard/appform" element={<AppointmentForm />} />
+            <Route exact path="/admindashboard/" element={<AdminDashboardNavs />} />
+            <Route exact path="/admindashboard/patientForm" element={<PatientForm />} />
+            <Route exact path="/admindashboard/docForm" element={<DoctorForm />} />
+            <Route exact path="/admindashboard/adminForm" element={<NewAdminForm />} />
           </Routes>
         </Router>
         </ApolloProvider>,
