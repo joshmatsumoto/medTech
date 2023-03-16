@@ -4,10 +4,10 @@ import Navigation from "../Navigation/Navigation";
 
 function Header() {
     return (
-        <Container fluid>
+        <div>
             <img src={medTechLogo2} alt="medTech Logo"/>
             <Navigation />
-        </Container>
+        </div>
     );
 }
 
