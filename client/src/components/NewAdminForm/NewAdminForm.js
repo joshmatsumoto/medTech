@@ -1,12 +1,11 @@
 import React, { useState }  from "react";
-import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import Auth from '../../utils/auth';
 import { ADD_ADMIN } from '../../utils/mutations';
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
 function NewAdminForm(props) {
-  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [formState] = useState({ email: '', password: '' });
   const [addAdmin] = useMutation(ADD_ADMIN);
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -15,7 +14,7 @@ function NewAdminForm(props) {
         email: formState.email,
         password: formState.password,
         name: formState.name,
-        lastName: formState.lastName,
+        
       },
     });
     const token = mutationResponse.data.addUser.token;

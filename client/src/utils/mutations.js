@@ -1,20 +1,19 @@
 import { gql } from '@apollo/client';
 
 export const LOGIN = gql`
-mutation login ($userType: String!, $email: String!, $password: String!) {
+mutation Login($userType: String!, $email: String!, $password: String!) {
   login(userType: $userType, email: $email, password: $password) {
     token
-    if(userType == "Patient"){
-    patient{
-    _id
-    }
-    else if(userType == "Doctor"){
-    doctor{
-    _id
-    }
-    else{
-    admin{
-    _id
+    user {
+      ... on Patient {
+        _id
+      }
+      ... on Doctor {
+        _id
+      }
+      ... on Admin {
+        _id
+      }
     }
   }
 }
