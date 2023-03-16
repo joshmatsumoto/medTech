@@ -1,13 +1,51 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
+import { Link } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import Auth from '../../utils/auth';
+import { ADD_PATIENT } from '../../utils/mutations';
 
-function PatientForm() {
+
+function PatientForm(props) {
+  const [formState, setFormState] = useState({ email: '', password: '' });
   const [patientData, setPatientData] = useState({
     address: "",
     city: "",
     state: "",
     zip: "",
   });
+  const [addPatient] = useMutation(ADD_PATIENT);
+  const [validated, setValidated] = useState(false);
+
+  const handleFormSubmit = async (event) => {
+    const form = event.currentTarget;
+    event.preventDefault();
+    const mutationResponse = await addPatient({
+      variables: {
+        email: formState.email,
+        password: formState.password,
+        name: formState.name,
+        age: formState.age,
+        gender: formState.gender,
+        address: formState.concatenatedAddress,
+        // city: formState.city,
+        // state: formState.state,
+        // zip: formState.zip,
+      },
+    });
+    const token = mutationResponse.data.addPatient.token;
+    Auth.login(token);
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    setValidated(true);
+
+  };
+
+
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -26,7 +64,7 @@ function PatientForm() {
 
   return (
     <Container className="text-dark text-start">
-      <Form onSubmit={handleSubmit}>
+      <Form validated={validated} onSubmit={[handleSubmit, handleFormSubmit]}>
         <Row className="mb-3">
           <Col md={{ span: 6, offset: 3 }}>
             <Form.Group className="mb-3" controlId="patientsName">
@@ -153,9 +191,13 @@ function PatientForm() {
 
         <Row className="mb-3">
           <Col md={{ span: 6, offset: 3 }}>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
+          <Link
+              className="btn"
+              role="button"
+              to="/patdashboard"
+            >
+              login
+            </Link>
           </Col>
         </Row>
       </Form>

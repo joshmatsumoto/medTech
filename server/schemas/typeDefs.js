@@ -89,11 +89,11 @@ const typeDefs = gql`
 
     assignPatient(doctor:ID!): Doctor
 
-    createDoctor(userType: String!, name: String!, email:String!, password:String!, department: String!, officeHours: String!, officeLocation: String!): Auth
+    createDoctor(userType: String!, name: String, email:String!, password:String!, department: String, officeHours: String, officeLocation: String): Auth
 
-    createPatient(userType: String!, name: String!, age: Int!, gender: String!, address: String!, phone: String!, email: String!, password: String!,): Auth
+    createPatient(userType: String!, name: String, age: Int, gender: String, address: String, phone: String, email: String!, password: String!,): Auth
 
-    createAdmin(userType: String!, name: String!, email: String!,password: String!, phoneNumber:String!): Auth
+    createAdmin(userType: String!, name: String, email: String!,password: String!, phoneNumber:String!): Auth
 
     createAppointment(_id: ID!, dateTime: String!, reason: String!): Appointment
 

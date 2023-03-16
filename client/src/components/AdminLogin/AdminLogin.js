@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
+import { Link } from 'react-router-dom';
 import { LOGIN } from '../../utils/mutations'
 import Auth from '../../utils/auth';
 import { Container, Form, Row, Col, Button, Alert } from 'react-bootstrap';
@@ -54,8 +55,8 @@ const AdminLogin = (props) => {
         </Alert>
         <Row>
           <Col md={{ span: 6, offset: 3 }}>
-            <Form.Group className="mb-3" controlId="adminLogin">
-              <Form.Label htmlFor='email'> Administrator Email</Form.Label>
+            <Form.Group className="mb-3" controlId="adminEmail">
+              <Form.Label> Administrator Email</Form.Label>
               <Form.Control
                 type='text'
                 placeholder='Your email'
@@ -70,8 +71,8 @@ const AdminLogin = (props) => {
         </Row>
         <Row>
           <Col md={{ span: 6, offset: 3 }}>
-            <Form.Group>
-              <Form.Label htmlFor='password'> Administrator Password</Form.Label>
+            <Form.Group controlId='adminPassword'>
+              <Form.Label > Administrator Password</Form.Label>
               <Form.Control
                 type='password'
                 placeholder='Your password'
@@ -86,13 +87,13 @@ const AdminLogin = (props) => {
         </Row>
         <Row>
           <Col md={{ span: 6, offset: 3 }}>
-            <Button
-              disabled={!(adminFormData.email && adminFormData.password)}
-              type='submit'
-              variant='success'
-              className='mt-3'>
-              Submit
-            </Button>
+          <Link
+              className="btn"
+              role="button"
+              to="/admindashboard"
+            >
+              login
+            </Link>
           </Col>
         </Row>
         {error ? (

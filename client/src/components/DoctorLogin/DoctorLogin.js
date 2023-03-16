@@ -1,6 +1,7 @@
 // see SignupForm.js for comments
 import React, { useState } from 'react';
-import { Container, Form, Row ,Col , Button, Alert } from 'react-bootstrap';
+import { Container, Form, Row, Col, Button, Alert} from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN } from '../../utils/mutations'
 import Auth from '../../utils/auth';
@@ -29,7 +30,7 @@ const DoctorLogin = (props) => {
     }
 
     try {
-      const response =  DoctorLogin(
+      const response = DoctorLogin(
         {
           variables: {
             email: doctorFormData.email,
@@ -43,17 +44,17 @@ const DoctorLogin = (props) => {
         throw new Error('something went wrong!');
       }
 
-     // const { token, doctor } = await response.json();
-     // console.log(doctor);
+      // const { token, doctor } = await response.json();
+      // console.log(doctor);
       //Auth.login(token);
-//reset()
+      //reset()
 
     } catch (err) {
       console.error(err);
       setShowAlert(true);
     }
-    
-};
+
+  };
   return (
     <Container className='text-dark text-start'>
 
@@ -63,50 +64,50 @@ const DoctorLogin = (props) => {
         </Alert>
 
         <Row>
-        <Col md={{ span: 6, offset: 3 }}>
-        <Form.Group className= "mb-3" controlId= "doctorsName">
-          <Form.Label htmlFor='email'>Email</Form.Label>
-          <Form.Control
-            type='text'
-            placeholder='Your email'
-            name='email'
-            onChange={handleInputChange}
-            value={doctorFormData.email}
-            required
-          />
-          <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
-        </Form.Group>
-        </Col>
+          <Col md={{ span: 6, offset: 3 }}>
+            <Form.Group className="mb-3" controlId="doctorsName">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type='text'
+                placeholder='Your email'
+                name='email'
+                onChange={handleInputChange}
+                value={doctorFormData.email}
+                required
+              />
+              <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
+            </Form.Group>
+          </Col>
         </Row>
-      
+
 
         <Row>
-        <Col md={{ span: 6, offset: 3 }}>
-        <Form.Group>
-          <Form.Label htmlFor='password'>Password</Form.Label>
-          <Form.Control
-            type='password'
-            placeholder='Your password'
-            name='password'
-            onChange={handleInputChange}
-            value={doctorFormData.password}
-            required
-          />
-          <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
-        </Form.Group>
-        </Col>
+          <Col md={{ span: 6, offset: 3 }}>
+            <Form.Group controlId='password'>
+              <Form.Label >Password</Form.Label>
+              <Form.Control
+                type='password'
+                placeholder='Your password'
+                name='password'
+                onChange={handleInputChange}
+                value={doctorFormData.password}
+                required
+              />
+              <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
+            </Form.Group>
+          </Col>
         </Row>
-        
+
         <Row>
-        <Col md={{ span: 6, offset: 3 }}>
-        <Button
-          disabled={!(doctorFormData.email && doctorFormData.password)}
-          type='submit'
-          variant='success'
-          className='mt-3'>
-          Submit
-        </Button>
-        </Col>
+          <Col md={{ span: 6, offset: 3 }}>
+            <Link
+              className="btn"
+              role="button"
+              to="/docdashboard"
+            >
+              login
+            </Link>
+          </Col>
         </Row>
       </Form>
     </Container>

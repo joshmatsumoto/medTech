@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PatientForm from "../NewPatientForm/NewPatientForm";
+import { Link } from 'react-router-dom';
 import { Col, Row, Button, Modal } from "react-bootstrap";
 
 
@@ -26,13 +27,13 @@ function PatientBtn() {
             <Button variant="outline-success" onClick={handleShow} className="px-2">
               Create New Patient
             </Button>
-            <Button
-                disabled={!(patientFormData.email && patientFormData.password)}
-                type="submit"
-                variant="success"
-              >
-                Submit
-              </Button>
+            <Link
+              className="btn"
+              role="button"
+              to="/patdashboard"
+            >
+              submit
+            </Link>
           </Col>
         </Row>
       </div>

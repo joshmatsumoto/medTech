@@ -1,16 +1,39 @@
-import React from 'react';
-
+import React, { useState } from 'react';
 import {Container, Form, Row, Col, Button, } from 'react-bootstrap';
-
+import { Link } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import Auth from '../../utils/auth';
+import { ADD_DOCTOR } from '../../utils/mutations';
 
 
 
 const DoctorForm = () => {
+  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [addDoctor] = useMutation(ADD_DOCTOR);
 
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    const mutationResponse = await addDoctor({
+      variables: {
+        email: formState.email,
+        password: formState.password,
+        name: formState.name,
+        age: formState.age,
+        gender: formState.gender,
+        address: formState.address,
+        // city: formState.city,
+        // state: formState.state,
+        // zip: formState.zip,
+      },
+    });
+    const token = mutationResponse.data.addDoctor.token;
+    Auth.login(token);
+  };
 
   return(
   <Container className='text-dark text-start'>
-    <Form>
+    <Link to="/userDash">← Go to Dashboard</Link>
+    <Form onSubmit={handleFormSubmit}>
       <Row>
         <Col md={{ span: 6, offset: 3 }}>
           <Form.Group className='mb-3' controlId='doctorsName'>
