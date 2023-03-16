@@ -102,7 +102,8 @@ const DoctorLogin = (props) => {
         <Button
           disabled={!(doctorFormData.email && doctorFormData.password)}
           type='submit'
-          variant='success'>
+          variant='success'
+          className='mt-3'>
           Submit
         </Button>
         </Col>

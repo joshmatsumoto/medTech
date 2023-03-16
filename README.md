@@ -27,7 +27,7 @@ Team Members:
   - [Edwin Hernandez](https://github.com/EdwinHdz04)
   - [Ashley Sese](https://github.com/ashrean)
 
-- [Deployed Link](https://ucbvirtfsfft1-8fx2960.slack.com//medtech.herokuapp.com)
+- [Deployed Link](https://medtech.herokuapp.com)
 
 
 

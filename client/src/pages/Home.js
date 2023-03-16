@@ -19,10 +19,7 @@ const Home = () => {
     return (
         <>
              <Header/>
-             <div>
-            <SafetyTips/>
-
-             </div>
+             
              <PatientLogin/>
 
              <div className='d-flex justify-content-center gap-3'>
@@ -30,7 +27,11 @@ const Home = () => {
              
              <AdminBtn/>
              </div>
+             <div>
+            <SafetyTips/>
 
+             </div>
+             
              <Footer/>
       </>
      );

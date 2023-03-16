@@ -89,7 +89,8 @@ const AdminLogin = (props) => {
             <Button
               disabled={!(adminFormData.email && adminFormData.password)}
               type='submit'
-              variant='success'>
+              variant='success'
+              className='mt-3'>
               Submit
             </Button>
           </Col>
@@ -99,9 +100,6 @@ const AdminLogin = (props) => {
             <p className="error-text">The provided credentials are incorrect</p>
           </div>
         ) : null}
-        <div className="flex-row flex-end">
-          <button type="submit">Submit</button>
-        </div>
       </Form> 
     </Container>
   );
