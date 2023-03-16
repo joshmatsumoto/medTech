@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
+import { Link } from 'react-router-dom';
 import { LOGIN } from '../../utils/mutations'
 import Auth from '../../utils/auth';
 import { Container, Form, Row, Col, Button, Alert } from 'react-bootstrap';
@@ -86,13 +87,13 @@ const AdminLogin = (props) => {
         </Row>
         <Row>
           <Col md={{ span: 6, offset: 3 }}>
-            <Button
-              disabled={!(adminFormData.email && adminFormData.password)}
-              type='submit'
-              variant='success'
-              className='mt-3'>
-              Submit
-            </Button>
+          <Link
+              className="btn"
+              role="button"
+              to="/admindashboard"
+            >
+              login
+            </Link>
           </Col>
         </Row>
         {error ? (

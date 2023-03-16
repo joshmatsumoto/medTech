@@ -191,9 +191,13 @@ function PatientForm(props) {
 
         <Row className="mb-3">
           <Col md={{ span: 6, offset: 3 }}>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
+          <Link
+              className="btn"
+              role="button"
+              to="/patdashboard"
+            >
+              login
+            </Link>
           </Col>
         </Row>
       </Form>

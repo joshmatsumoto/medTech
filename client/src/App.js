@@ -5,6 +5,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./styles/custom.min.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
+import DocDashboardNavs from "./pages/DocDash";
+import PatDashboardNavs from "./pages/PatDash";
+import AdminDashboardNavs from "./pages/AdminDash";
 import {
   ApolloClient,
   InMemoryCache,
@@ -41,6 +44,9 @@ function App() {
         <Router>
           <Routes>
             <Route exact path="/" element={<Home />} />
+            <Route exact path="/docdashboard" element={<DocDashboardNavs />} />
+            <Route exact path="/patdashboard" element={<PatDashboardNavs />} />
+            <Route exact path="/admindashboard" element={<AdminDashboardNavs />} />
           </Routes>
         </Router>
         </ApolloProvider>,

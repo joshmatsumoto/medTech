@@ -1,12 +1,13 @@
-import DoctorNavBar from "../components/Navigation/DoctorNavigation";
+import AdminNavBar from "../components/Navigation/AdminNavigation";
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
+import SafetyTips from '../components/SafetyTips/SafetyTips';
 
 const AdminDashboardNavs = () =>{
     return (
       <>
-        <Header/>
-        <DoctorNavBar/>
+        <AdminNavBar/>
+        <SafetyTips/>
         <Footer/>
       </>
       );
