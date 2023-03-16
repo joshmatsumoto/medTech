@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
-import { Container, Form, Row ,Col , Button, Alert } from 'react-bootstrap';
+import { useMutation } from '@apollo/client';
+import { LOGIN } from '../../utils/mutations'
+import Auth from '../../utils/auth';
+import { Container, Form, Row, Col, Button, Alert } from 'react-bootstrap';
 //import Auth from '../utils/auth';
-const AdminLogin = () => {
+const AdminLogin = (props) => {
+  const [AdminLogin, { error }] = useMutation(LOGIN);
   const [adminFormData, setAdminFormData] = useState({ email: '', password: '' });
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
@@ -18,19 +22,30 @@ const AdminLogin = () => {
       event.stopPropagation();
     }
     try {
-      const response =  AdminLogin();
+      const response = AdminLogin(
+        {
+          variables: {
+            email: adminFormData.email,
+            password: adminFormData.password
+          },
+        }
+      );
+      const token = response.data.login.token;
+      Auth.login(token);
+
       if (!response.ok) {
         throw new Error('something went wrong!');
       }
-     // const { token, administrator } = await response.json();
-     // console.log(administrator );
+      // const { token, administrator } = await response.json();
+      // console.log(administrator );
       //Auth.login(token);
-//reset()
+      //reset()
     } catch (err) {
       console.error(err);
       setShowAlert(true);
     }
-};
+  };
+
   return (
     <Container className='text-dark text-start'>
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
@@ -38,48 +53,56 @@ const AdminLogin = () => {
           Something went wrong with your login credentials!
         </Alert>
         <Row>
-        <Col md={{ span: 6, offset: 3 }}>
-        <Form.Group className= "mb-3" controlId= "adminLogin">
-          <Form.Label htmlFor='email'> Administrator Email</Form.Label>
-          <Form.Control
-            type='text'
-            placeholder='Your email'
-            name='email'
-            onChange={handleInputChange}
-            value={adminFormData.email}
-            required
-          />
-          <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
-        </Form.Group>
-        </Col>
+          <Col md={{ span: 6, offset: 3 }}>
+            <Form.Group className="mb-3" controlId="adminLogin">
+              <Form.Label htmlFor='email'> Administrator Email</Form.Label>
+              <Form.Control
+                type='text'
+                placeholder='Your email'
+                name='email'
+                onChange={handleInputChange}
+                value={adminFormData.email}
+                required
+              />
+              <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
+            </Form.Group>
+          </Col>
         </Row>
         <Row>
-        <Col md={{ span: 6, offset: 3 }}>
-        <Form.Group>
-          <Form.Label htmlFor='password'> Administrator Password</Form.Label>
-          <Form.Control
-            type='password'
-            placeholder='Your password'
-            name='password'
-            onChange={handleInputChange}
-            value={adminFormData.password}
-            required
-          />
-          <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
-        </Form.Group>
-        </Col>
+          <Col md={{ span: 6, offset: 3 }}>
+            <Form.Group>
+              <Form.Label htmlFor='password'> Administrator Password</Form.Label>
+              <Form.Control
+                type='password'
+                placeholder='Your password'
+                name='password'
+                onChange={handleInputChange}
+                value={adminFormData.password}
+                required
+              />
+              <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
+            </Form.Group>
+          </Col>
         </Row>
         <Row>
-        <Col md={{ span: 6, offset: 3 }}>
-        <Button
-          disabled={!(adminFormData.email && adminFormData.password)}
-          type='submit'
-          variant='success'>
-          Submit
-        </Button>
-        </Col>
+          <Col md={{ span: 6, offset: 3 }}>
+            <Button
+              disabled={!(adminFormData.email && adminFormData.password)}
+              type='submit'
+              variant='success'>
+              Submit
+            </Button>
+          </Col>
         </Row>
-      </Form>
+        {error ? (
+          <div>
+            <p className="error-text">The provided credentials are incorrect</p>
+          </div>
+        ) : null}
+        <div className="flex-row flex-end">
+          <button type="submit">Submit</button>
+        </div>
+      </Form> 
     </Container>
   );
 };

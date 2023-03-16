@@ -7,21 +7,35 @@ import DatePicker from "react-datepicker";
 import { setHours, setMinutes } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 import Button from "react-bootstrap/Button";
+import { useMutation } from '@apollo/client';
+import Auth from '../../utils/auth';
+import { ADD_APPOINTMENT } from '../../utils/mutations';
 // import { useMutation } from "@apollo/client";
 
 function AppointmentForm() {
+  const [formState, setFormState] = useState({ dateTime: '', reason:'' });
+  const [addAppointment] = useMutation(ADD_APPOINTMENT);
   const [startDate, setStartDate] = useState(new Date());
   const filterPassedTime = (time) => {
     const currentDate = new Date();
     const selectedDate = new Date(time);
-
     return currentDate.getTime() < selectedDate.getTime();
   };
 
   const [validated, setValidated] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     const form = event.currentTarget;
+    const mutationResponse = await addAppointment({
+      variables: {
+        email: formState.email,
+        password: formState.password,
+        name: formState.name,
+        lastName: formState.lastName,
+      },
+    });
+    const token = mutationResponse.data.addUser.token;
+    Auth.login(token);
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();

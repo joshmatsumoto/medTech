@@ -1,10 +1,31 @@
-import React from "react";
+import React, { useState }  from "react";
+import { useMutation } from '@apollo/client';
+import Auth from '../../utils/auth';
+import { ADD_ADMIN } from '../../utils/mutations';
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
-function newAdminForm() {
+function NewAdminForm(props) {
+  const [formState] = useState({ email: '', password: '' });
+  const [addAdmin] = useMutation(ADD_ADMIN);
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    const mutationResponse = await addAdmin({
+      variables: {
+        email: formState.email,
+        password: formState.password,
+        name: formState.name,
+        
+      },
+    });
+    const token = mutationResponse.data.addUser.token;
+    Auth.login(token);
+  };
+
+
+
   return (
     <Container className="text-dark text-start">
-      <Form>
+      <Form onSubmit={handleFormSubmit}>
         <Row className="mb-3">
           <Col md={{ span: 6, offset: 3 }}>
             <Form.Group className="mb-3" controlId="adminName">
@@ -74,4 +95,4 @@ function newAdminForm() {
   );
 }
 
-export default newAdminForm;
+export default NewAdminForm;
