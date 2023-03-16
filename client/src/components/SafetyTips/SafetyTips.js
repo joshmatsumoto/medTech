@@ -8,7 +8,7 @@ import { Link } from'react-router-dom';
 
 function SafetyTips() {
   return (
-    <Carousel variant="dark">
+    <Carousel className='mt-5' variant="dark">
       <Carousel.Item interval={1000}>
         <div> < Image as={Link} to="https://www.techsafety.org/technology-safety-quick-tips" alt="1x2"
           className="d-block w-100"
