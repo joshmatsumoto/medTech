@@ -31,7 +31,7 @@ return (
                         Home
                     </Nav.Link>
                     <NavDropdown title="Appointments" id="appointment-dropdown">
-                        <NavDropdown.Item onClick={handleShowAppointmentsForm}>
+                        <NavDropdown.Item as={Link}to='/docdashboard/appform'>
                             Create New Appointment
                         </NavDropdown.Item>
                         <NavDropdown.Item>
@@ -39,7 +39,7 @@ return (
                         </NavDropdown.Item>
                     </NavDropdown>
                     <NavDropdown title="Patients" id="patients-dropdown">
-                        <NavDropdown.Item onClick={handleShowPatientsForm}>
+                        <NavDropdown.Item as={Link}to='/docdashboard/patform'>
                             Create New Patient
                         </NavDropdown.Item>
                         <NavDropdown.Item>

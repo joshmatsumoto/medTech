@@ -196,7 +196,7 @@ function PatientForm(props) {
               role="button"
               to="/patdashboard"
             >
-              login
+              submit
             </Link>
           </Col>
         </Row>

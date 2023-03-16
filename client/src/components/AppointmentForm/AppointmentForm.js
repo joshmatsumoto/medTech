@@ -12,7 +12,7 @@ import Auth from '../../utils/auth';
 import { ADD_APPOINTMENT } from '../../utils/mutations';
 // import { useMutation } from "@apollo/client";
 
-function AppointmentForm() {
+function AppointmentForm(props) {
   const [formState, setFormState] = useState({ dateTime: '', reason:'' });
   const [addAppointment] = useMutation(ADD_APPOINTMENT);
   const [startDate, setStartDate] = useState(new Date());
@@ -45,7 +45,7 @@ function AppointmentForm() {
   }
 
   return (
-    <div className="appointmentForm">
+    <Container className='text-dark text-start'>
       <Container fluid className="bg-primary text-light p-4">
         <h1>Create A New Appointment </h1>
       </Container>
@@ -127,7 +127,7 @@ function AppointmentForm() {
           </Row>
         </Form>
       </Container>
-    </div>
+    </Container>
   );
 }
 
